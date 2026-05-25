@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qonjit — Discover & book trusted beauty professionals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+Ethiopic:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#fff; --soft:#FAF7F2; --line:#EAE5DC; --ink:#1A140F; --text:#2C1F15;
+  --muted:#6B5C4F; --muted-l:#9C8E80; --terra:#C2683A; --terra-d:#A0532B;
+  --terra-s:#F4E4D7; --coffee:#2C1F15; --hero:#1F2E26; --cream:#F7F1E6;
+  --saffron:#D89548; --sage:#8B9A82; --aubergine:#3D2438; --success:#4F7A4A;
+  --serif:'Fraunces',Georgia,serif;
+  --sans:'Plus Jakarta Sans',system-ui,sans-serif;
+  --ethio:'Noto Sans Ethiopic',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+body.lang-am,body.lang-am *{font-family:var(--ethio),var(--sans)}
+a{color:inherit;text-decoration:none;cursor:pointer}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,select,textarea{font-family:inherit}
+
+/* HEADER */
+header{border-bottom:1px solid var(--line);background:var(--bg);position:sticky;top:0;z-index:50}
+.hdr{max-width:1280px;margin:0 auto;padding:18px 32px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center}
+.menu-btn{width:28px;height:28px;display:flex;flex-direction:column;justify-content:center;gap:6px;justify-self:start}
+.menu-btn span{height:1.5px;background:var(--ink);border-radius:1px}
+.logo{font-family:var(--serif);font-weight:700;font-size:26px;letter-spacing:.04em;color:var(--ink);text-transform:uppercase}
+.logo-am{font-family:var(--ethio);font-size:13px;color:var(--terra);font-weight:500;margin-left:6px;text-transform:none;letter-spacing:0}
+.hdr-right{display:flex;align-items:center;gap:14px;justify-self:end}
+.login-link{font-size:14px;font-weight:600;color:var(--ink)}
+.login-link:hover{color:var(--terra)}
+.join-cta{background:var(--terra);color:#fff;padding:10px 18px;border-radius:6px;font-size:13px;font-weight:600}
+.join-cta:hover{background:var(--terra-d)}
+.lang-pill{display:flex;gap:2px;background:var(--soft);border-radius:100px;padding:3px;font-size:12px;font-weight:600}
+.lang-pill span{padding:5px 11px;border-radius:100px;color:var(--muted);cursor:pointer}
+.lang-pill span.active{background:var(--ink);color:#fff}
+.lang-pill .am{font-family:var(--ethio)}
+@media (max-width:720px){.lang-pill{display:none}}
+
+/* MENU */
+.menu-ov{position:fixed;inset:0;background:rgba(26,20,15,.55);z-index:99;opacity:0;visibility:hidden;transition:.3s}
+.menu-ov.open{opacity:1;visibility:visible}
+.side{position:fixed;top:0;left:0;bottom:0;width:320px;max-width:85vw;background:var(--bg);z-index:100;transform:translateX(-100%);transition:transform .3s;overflow-y:auto;padding:24px}
+.side.open{transform:translateX(0)}
+.menu-close{width:36px;height:36px;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.menu-section h6{font-family:var(--serif);font-size:16px;font-weight:600;color:var(--ink);margin:18px 0 10px;padding-top:14px;border-top:1px solid var(--line)}
+.menu-section h6:first-of-type{border-top:none;padding-top:0}
+.menu-section a{display:block;padding:9px 0;font-size:14px;color:var(--text)}
+.menu-section a:hover{color:var(--terra)}
+.menu-lang{margin-top:24px;padding-top:18px;border-top:1px solid var(--line)}
+.menu-lang .label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.menu-lang-row{display:flex;gap:6px}
+.menu-lang-row span{flex:1;padding:8px;border:1px solid var(--line);border-radius:6px;font-size:12px;font-weight:600;color:var(--text);cursor:pointer;text-align:center}
+.menu-lang-row span.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.menu-lang-row .am{font-family:var(--ethio)}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:8px;font-weight:600;font-size:14px;transition:.2s;cursor:pointer}
+.btn-p{background:var(--terra);color:#fff}
+.btn-p:hover{background:var(--terra-d)}
+.btn-d{background:var(--coffee);color:#fff}
+.btn-d:hover{background:#000}
+.btn-o{border:1.5px solid var(--ink);color:var(--ink)}
+.btn-o:hover{background:var(--ink);color:#fff}
+.btn-lg{padding:16px 28px;font-size:15px}
+.btn-full{width:100%;justify-content:center}
+
+/* FORMS */
+.fg{margin-bottom:20px}
+.fl{display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:8px}
+.fi{width:100%;padding:14px 16px;border:1.5px solid var(--line);border-radius:8px;font-size:15px;color:var(--ink);background:var(--bg);font-family:inherit}
+.fi:focus{outline:none;border-color:var(--terra)}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:640px){.fr{grid-template-columns:1fr}}
+
+/* HOME HERO */
+.hero{max-width:1280px;margin:0 auto;padding:24px 32px 32px}
+.hero-box{background:var(--hero);border-radius:16px;padding:80px 64px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;position:relative;overflow:hidden}
+.hero-h{font-family:var(--serif);font-size:clamp(34px,4.2vw,52px);font-weight:600;line-height:1.05;letter-spacing:-.02em;color:var(--cream);margin-bottom:32px}
+body.lang-am .hero-h{font-family:var(--ethio)}
+.sb{background:#fff;border-radius:100px;padding:8px 8px 8px 24px;display:grid;grid-template-columns:1fr 1px 1fr auto;align-items:center;gap:16px;box-shadow:0 4px 24px rgba(0,0,0,.12)}
+.sb-f{display:flex;align-items:center;gap:10px}
+.sb-i{width:18px;height:18px;color:var(--muted)}
+.sb-f input{border:none;outline:none;width:100%;padding:12px 0;font-size:14px;color:var(--ink);background:transparent}
+.sb-d{width:1px;height:28px;background:var(--line)}
+.sb-btn{width:44px;height:44px;border-radius:50%;background:var(--terra);display:flex;align-items:center;justify-content:center}
+.sb-btn svg{color:#fff;width:18px;height:18px}
+.grow{margin-top:56px;display:flex;align-items:center;gap:16px;font-size:14px;color:rgba(247,241,230,.85);flex-wrap:wrap}
+.grow-cta{background:var(--terra);color:#fff;padding:10px 18px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer}
+.grow-cta:hover{background:var(--terra-d)}
+.viz{position:relative;height:360px}
+.col{position:absolute;border-radius:4px}
+.col.a{top:0;right:20%;width:220px;height:280px;background:linear-gradient(135deg,#8B5A3C,#3D2818);transform:rotate(-3deg);box-shadow:0 12px 40px rgba(0,0,0,.3)}
+.col.b{bottom:10px;right:-10px;width:200px;height:200px;background:var(--saffron);transform:rotate(4deg);box-shadow:0 12px 40px rgba(0,0,0,.2)}
+.col.c{top:60px;right:60%;width:100px;height:130px;background:var(--terra);transform:rotate(8deg);box-shadow:0 8px 24px rgba(0,0,0,.25)}
+@media (max-width:880px){
+.hero{padding:16px 16px 20px}.hero-box{padding:40px 24px;grid-template-columns:1fr;gap:28px}
+.viz{display:none}.sb{padding:6px;grid-template-columns:1fr}.sb-d{display:none}
+.sb-f{border-bottom:1px solid var(--line);padding:0 12px}.sb-f:nth-child(3){border:none}
+.sb-btn{width:100%;height:44px;border-radius:6px}
+}
+
+/* SECTIONS */
+section.cnt{max-width:1280px;margin:0 auto;padding:56px 32px}
+.st-row{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:28px}
+.st-row h2{font-family:var(--serif);font-size:28px;font-weight:600;color:var(--ink);letter-spacing:-.01em}
+body.lang-am .st-row h2,body.lang-am h1,body.lang-am h2,body.lang-am h3,body.lang-am h4{font-family:var(--ethio)}
+.see{font-size:13px;font-weight:600;color:var(--ink);cursor:pointer}
+.see:hover{color:var(--terra)}
+
+/* SERVICES */
+.svc-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.svc{background:var(--soft);border-radius:10px;overflow:hidden;cursor:pointer;transition:transform .2s;border:1px solid transparent;color:inherit}
+.svc:hover{transform:translateY(-3px);border-color:var(--line)}
+.svc-i{aspect-ratio:1/1.15;position:relative;overflow:hidden}
+.s1{background:#5C4033}.s2{background:#2D5A3D}.s3{background:#6B4F8A}.s4{background:#3D5A5C}
+.s5{background:#8B4A3C}.s6{background:#4A3B5C}.s7{background:#3D6B5A}.s8{background:#6B3D5C}
+.s9{background:#4A4A5C}.s10{background:#B57F40}.s11{background:#8B6B3D}.s12{background:#5C4A6B}
+.svc-g{font-family:var(--serif);font-style:italic;font-size:64px;color:rgba(255,255,255,.18);position:absolute;top:20px;right:20px;line-height:1}
+.svc-am{font-family:var(--ethio);font-size:14px;color:rgba(255,255,255,.75);position:absolute;bottom:16px;left:16px;font-weight:500}
+.svc-lb{padding:12px 14px;font-size:13.5px;font-weight:600;color:var(--ink);text-align:center}
+@media (max-width:1024px){.svc-grid{grid-template-columns:repeat(4,1fr)}}
+@media (max-width:640px){.svc-grid{grid-template-columns:repeat(3,1fr);gap:10px}.svc-g{font-size:44px}.svc-lb{padding:10px;font-size:12px}}
+
+/* PROS */
+.pros{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.pro{background:var(--bg);border:1px solid var(--line);border-radius:10px;overflow:hidden;cursor:pointer;transition:.2s;color:inherit}
+.pro:hover{border-color:var(--terra);transform:translateY(-2px)}
+.pro-i{aspect-ratio:1;position:relative;background:var(--soft)}
+.pro-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:56px;color:rgba(255,255,255,.5);letter-spacing:.04em;font-weight:500}
+.b1{background:linear-gradient(135deg,#3D2818,#5C4033)}
+.b2{background:linear-gradient(135deg,#2D4A3D,#4A6B5A)}
+.b3{background:linear-gradient(135deg,#6B3D5C,#8B5A6B)}
+.b4{background:linear-gradient(135deg,#B57F40,#D89548)}
+.b5{background:linear-gradient(135deg,#4A3B5C,#6B4F8A)}
+.badge{position:absolute;top:10px;left:10px;background:var(--cream);color:var(--coffee);padding:5px 11px;border-radius:100px;font-size:11px;font-weight:600;display:flex;align-items:center;gap:4px;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.badge svg{width:11px;height:11px;color:var(--terra)}
+.verify{position:absolute;top:10px;right:10px;width:26px;height:26px;background:var(--cream);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.verify svg{width:14px;height:14px;color:var(--sage)}
+.pro-info{padding:14px}
+.pro-name{font-family:var(--serif);font-size:16px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.pro-meta{font-size:12.5px;color:var(--muted);margin-bottom:6px}
+.pro-rating{font-size:12.5px;color:var(--ink)}
+.pro-rating .c{color:var(--muted)}
+@media (max-width:1024px){.pros{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:640px){.pros{grid-template-columns:repeat(2,1fr);gap:10px}.pro-bg{font-size:36px}}
+
+/* HOW + BIZ */
+.how{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;background:var(--soft);border-radius:12px;padding:36px}
+.how-i{display:flex;gap:16px;align-items:flex-start}
+.how-n{font-family:var(--serif);font-size:32px;font-weight:600;color:var(--terra);line-height:1;min-width:30px}
+.how-i h4{font-family:var(--serif);font-size:18px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.how-i p{font-size:13.5px;color:var(--muted);line-height:1.5}
+.biz{background:linear-gradient(135deg,var(--terra),var(--terra-d));border-radius:16px;padding:56px;color:#fff;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;position:relative;overflow:hidden}
+.biz::before{content:'';position:absolute;top:-50%;right:-10%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(216,149,72,.3),transparent 70%)}
+.biz h2{font-family:var(--serif);font-size:36px;font-weight:600;margin-bottom:14px;letter-spacing:-.02em;line-height:1.05;position:relative}
+body.lang-am .biz h2{font-family:var(--ethio)}
+.biz p{font-size:16px;margin-bottom:28px;opacity:.92;position:relative}
+.biz-b{display:grid;grid-template-columns:1fr 1fr;gap:14px;position:relative}
+.biz-bi{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:8px;padding:18px;backdrop-filter:blur(8px)}
+.biz-bi h4{font-family:var(--serif);font-size:15px;font-weight:600;margin-bottom:6px}
+.biz-bi p{font-size:12.5px;margin:0;line-height:1.5;opacity:.88}
+@media (max-width:880px){
+section.cnt{padding:40px 16px}.how{grid-template-columns:1fr;padding:24px;gap:20px}
+.biz{padding:32px 24px;grid-template-columns:1fr;gap:24px}.biz h2{font-size:26px}.biz-b{grid-template-columns:1fr}
+}
+
+/* AUTH */
+.auth-w{min-height:calc(100vh - 100px);display:flex;align-items:center;justify-content:center;padding:40px 20px;background:var(--soft)}
+.auth-c{background:var(--bg);border-radius:16px;padding:48px 40px;width:100%;max-width:460px;border:1px solid var(--line)}
+.auth-t{font-family:var(--serif);font-size:32px;font-weight:600;color:var(--ink);margin-bottom:8px;letter-spacing:-.02em}
+body.lang-am .auth-t{font-family:var(--ethio)}
+.auth-s{font-size:14px;color:var(--muted);margin-bottom:28px}
+.auth-d{display:flex;align-items:center;gap:14px;margin:24px 0;color:var(--muted);font-size:13px}
+.auth-d::before,.auth-d::after{content:'';flex:1;height:1px;background:var(--line)}
+.soc{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:13px;border:1.5px solid var(--line);border-radius:8px;font-weight:600;font-size:14px;color:var(--ink);background:var(--bg);margin-bottom:10px;cursor:pointer}
+.soc:hover{background:var(--soft)}
+.auth-f{margin-top:24px;text-align:center;font-size:14px;color:var(--muted)}
+.auth-f a{color:var(--terra);font-weight:600}
+
+/* SEARCH */
+.s-strip{background:var(--bg);border-bottom:1px solid var(--line);padding:16px 0}
+.s-inner{max-width:1280px;margin:0 auto;padding:0 32px}
+.s-pill{background:var(--soft);border-radius:100px;padding:6px 6px 6px 18px;display:grid;grid-template-columns:1fr 1px 1fr auto;align-items:center;gap:12px;border:1px solid var(--line)}
+.s-pill input{border:none;background:transparent;outline:none;padding:10px 0;font-size:14px;color:var(--ink)}
+.s-pill .d{width:1px;height:22px;background:var(--line)}
+.s-pill button{background:var(--terra);color:#fff;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.s-pill button svg{width:16px;height:16px}
+.f-row{display:flex;gap:10px;flex-wrap:wrap;padding:16px 32px;max-width:1280px;margin:0 auto}
+.chip{padding:8px 16px;background:var(--bg);border:1px solid var(--line);border-radius:100px;font-size:13px;font-weight:500;color:var(--ink);cursor:pointer}
+.chip.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.r-head{max-width:1280px;margin:0 auto;padding:16px 32px 8px;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px}
+.r-cnt{font-family:var(--serif);font-size:24px;font-weight:600;color:var(--ink)}
+body.lang-am .r-cnt{font-family:var(--ethio)}
+.sort{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 14px;font-size:13px;font-weight:500;color:var(--ink);cursor:pointer}
+.r-grid{max-width:1280px;margin:0 auto;padding:24px 32px 80px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.pro-lg{background:var(--bg);border:1px solid var(--line);border-radius:12px;overflow:hidden;cursor:pointer;transition:.2s;color:inherit}
+.pro-lg:hover{border-color:var(--terra);transform:translateY(-2px)}
+.pro-lg .pro-i{aspect-ratio:1/1.05}
+.pro-svc{font-size:12px;color:var(--muted);margin-bottom:10px;line-height:1.4;padding:0 14px}
+.pro-bot{display:flex;justify-content:space-between;align-items:center;padding:10px 14px 14px;border-top:1px solid var(--line)}
+.pro-price{font-size:13px;color:var(--ink);font-weight:600}
+.pro-price .from{font-weight:400;color:var(--muted);font-size:11.5px}
+@media (max-width:1024px){.r-grid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:720px){.r-grid{grid-template-columns:repeat(2,1fr);padding:24px 16px 60px}}
+
+/* STYLIST */
+.p-hero{max-width:1280px;margin:0 auto;padding:32px;display:grid;grid-template-columns:1fr 1.2fr;gap:48px}
+.p-photo{aspect-ratio:1/1.1;background:linear-gradient(135deg,#3D2818,#5C4033);border-radius:16px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.p-init{font-family:var(--serif);font-size:140px;font-weight:500;color:rgba(255,255,255,.4)}
+.vid{position:absolute;bottom:20px;right:20px;background:rgba(0,0,0,.7);color:#fff;padding:8px 14px;border-radius:100px;font-size:12px;font-weight:600;display:flex;align-items:center;gap:8px;cursor:pointer}
+.badge-pro{position:absolute;top:16px;left:16px;background:var(--cream);color:var(--coffee);padding:7px 14px;border-radius:100px;font-size:12px;font-weight:700;display:flex;align-items:center;gap:6px}
+.badge-pro svg{width:13px;height:13px;color:var(--terra)}
+.p-info h1{font-family:var(--serif);font-size:42px;font-weight:600;color:var(--ink);margin-bottom:8px;display:flex;align-items:center;gap:12px;letter-spacing:-.02em}
+body.lang-am .p-info h1{font-family:var(--ethio)}
+.vb{width:28px;height:28px;background:var(--sage);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:#fff}
+.vb svg{width:16px;height:16px}
+.p-meta{display:flex;gap:20px;margin-bottom:8px;font-size:14px;color:var(--muted);flex-wrap:wrap}
+.p-meta div{display:flex;align-items:center;gap:6px}
+.p-meta svg{width:15px;height:15px}
+.rate{display:flex;align-items:center;gap:12px;margin-bottom:24px;font-size:15px;flex-wrap:wrap}
+.book-cnt{background:var(--soft);padding:4px 12px;border-radius:100px;font-size:13px;font-weight:600}
+.bio{font-size:15px;line-height:1.6;margin-bottom:24px}
+.tag{display:inline-flex;padding:5px 11px;background:var(--soft);border:1px solid var(--line);border-radius:100px;font-size:12px;font-weight:500;margin-right:6px;margin-bottom:6px}
+.act-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.tabs{border-bottom:1px solid var(--line);padding:0 32px;max-width:1280px;margin:32px auto 0;display:flex;gap:32px;overflow-x:auto}
+.tab{padding:14px 0;font-size:14px;font-weight:600;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer;white-space:nowrap}
+.tab.active{color:var(--ink);border-color:var(--terra)}
+.tc{max-width:1280px;margin:0 auto;padding:32px}
+.svc-list{display:grid;gap:12px}
+.svc-row{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:18px 24px;display:grid;grid-template-columns:1fr auto auto;gap:20px;align-items:center}
+.svc-row:hover{border-color:var(--terra)}
+.svc-n{font-family:var(--serif);font-size:18px;font-weight:600;color:var(--ink);margin-bottom:4px}
+body.lang-am .svc-n{font-family:var(--ethio)}
+.svc-inf{font-size:13px;color:var(--muted);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.svc-inf .dot{width:3px;height:3px;border-radius:50%;background:var(--muted)}
+.svc-p{font-family:var(--serif);font-size:22px;font-weight:600;color:var(--ink);white-space:nowrap}
+.book-sm{background:var(--terra);color:#fff;padding:10px 20px;border-radius:8px;font-weight:600;font-size:13px;cursor:pointer;white-space:nowrap}
+.book-sm:hover{background:var(--terra-d)}
+@media (max-width:640px){.svc-row{grid-template-columns:1fr;gap:12px}.book-sm{width:100%;text-align:center}}
+@media (max-width:880px){.p-hero{grid-template-columns:1fr;padding:16px;gap:24px}.p-info h1{font-size:32px}.p-init{font-size:100px}}
+
+/* BOOK */
+.bk{max-width:1100px;margin:0 auto;padding:32px;display:grid;grid-template-columns:1.4fr 1fr;gap:48px}
+.back{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--muted);margin-bottom:16px;cursor:pointer}
+.back:hover{color:var(--ink)}
+.steps{display:flex;gap:8px;margin-bottom:32px}
+.step-i{flex:1;height:4px;background:var(--line);border-radius:2px}
+.step-i.active{background:var(--terra)}
+.step-i.done{background:var(--success)}
+.bk-t{font-family:var(--serif);font-size:28px;font-weight:600;color:var(--ink);margin-bottom:8px}
+body.lang-am .bk-t{font-family:var(--ethio)}
+.bk-s{font-size:14px;color:var(--muted);margin-bottom:24px}
+.dg{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:28px}
+.dh{font-size:11px;font-weight:600;color:var(--muted);text-align:center;padding:8px 0}
+.dc{aspect-ratio:1;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;color:var(--ink);font-weight:500;border:1.5px solid transparent}
+.dc.past{color:var(--muted-l);cursor:not-allowed}
+.dc.av{background:var(--soft)}
+.dc.av:hover{border-color:var(--terra)}
+.dc.sel{background:var(--terra);color:#fff}
+.ts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:28px}
+.tslot{padding:12px;text-align:center;border:1.5px solid var(--line);border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;background:var(--bg)}
+.tslot:hover{border-color:var(--terra)}
+.tslot.sel{background:var(--terra);color:#fff;border-color:var(--terra)}
+.tslot.un{color:var(--muted-l);background:var(--soft);cursor:not-allowed;text-decoration:line-through}
+.sum{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:24px;position:sticky;top:100px}
+.sum-st{display:flex;align-items:center;gap:14px;padding-bottom:16px;border-bottom:1px solid var(--line);margin-bottom:16px}
+.sum-av{width:52px;height:52px;background:linear-gradient(135deg,#3D2818,#5C4033);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:20px;color:rgba(255,255,255,.5)}
+.sum-l{display:flex;justify-content:space-between;padding:10px 0;font-size:14px}
+.sum-l .lb{color:var(--muted)}
+.sum-l .vl{color:var(--ink);font-weight:500}
+.sum-tot{border-top:1px solid var(--line);margin-top:12px;padding-top:14px;display:flex;justify-content:space-between;align-items:center}
+.sum-tot .vl{font-family:var(--serif);font-size:22px;font-weight:600;color:var(--ink)}
+.dep{background:var(--terra-s);border:1px solid rgba(194,104,58,.2);border-radius:8px;padding:12px 14px;margin-top:14px;font-size:12.5px;line-height:1.5;color:var(--terra-d)}
+.pay{border:1.5px solid var(--line);border-radius:10px;padding:16px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px}
+.pay.sel{border-color:var(--terra);background:var(--terra-s)}
+.pay-i{width:44px;height:44px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:12px}
+.pay-i.tb{background:#00A859}
+.pay-i.mp{background:#ED1B24}
+.pay-i.cc{background:var(--coffee)}
+.succ{text-align:center;padding:60px 20px;max-width:520px;margin:0 auto}
+.succ-i{width:80px;height:80px;border-radius:50%;background:var(--success);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 24px}
+.succ-i svg{width:40px;height:40px}
+.succ-t{font-family:var(--serif);font-size:32px;font-weight:600;color:var(--ink);margin-bottom:12px}
+body.lang-am .succ-t{font-family:var(--ethio)}
+@media (max-width:880px){.bk{grid-template-columns:1fr;padding:20px;gap:32px}.sum{position:static}}
+
+/* PRO JOIN */
+.pj-hero{background:var(--hero);color:#fff;padding:80px 32px 100px;position:relative;overflow:hidden}
+.pj-inner{max-width:1100px;margin:0 auto;position:relative;z-index:2}
+.eyebrow{display:inline-block;background:var(--terra);color:#fff;padding:6px 14px;border-radius:100px;font-size:12px;font-weight:700;letter-spacing:.08em;margin-bottom:24px;text-transform:uppercase}
+.pj-hero h1{font-family:var(--serif);font-size:clamp(40px,5.5vw,64px);font-weight:600;line-height:1.02;letter-spacing:-.02em;color:var(--cream);margin-bottom:24px;max-width:900px}
+body.lang-am .pj-hero h1{font-family:var(--ethio)}
+.pj-hero p{font-size:18px;color:rgba(247,241,230,.85);max-width:620px;line-height:1.5;margin-bottom:32px}
+.pj-cta{display:flex;gap:12px;flex-wrap:wrap}
+.pj-cta .btn-o{color:#fff;border-color:rgba(255,255,255,.4)}
+.pj-cta .btn-o:hover{background:#fff;color:var(--ink)}
+.trial{margin-top:24px;display:inline-flex;align-items:center;gap:10px;color:rgba(247,241,230,.92);font-size:14px}
+.trial .d{width:8px;height:8px;background:var(--saffron);border-radius:50%}
+.stats{max-width:1100px;margin:-60px auto 0;padding:0 32px;position:relative;z-index:3}
+.stats-c{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:28px 32px;box-shadow:0 12px 40px rgba(26,20,15,.08);display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.stat{text-align:center}
+.stat-n{font-family:var(--serif);font-size:36px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.stat-l{font-size:13px;color:var(--muted)}
+@media (max-width:720px){.stats-c{grid-template-columns:1fr;gap:20px;padding:24px}}
+.feats{max-width:1100px;margin:0 auto;padding:80px 32px}
+.feats h2{font-family:var(--serif);font-size:clamp(28px,4vw,42px);font-weight:600;color:var(--ink);margin-bottom:16px;line-height:1.05;letter-spacing:-.02em}
+body.lang-am .feats h2{font-family:var(--ethio)}
+.feats .lead{font-size:16px;color:var(--muted);max-width:600px;margin-bottom:48px}
+.fg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.fc{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:28px 24px}
+.fc svg.ic{width:28px;height:28px;color:var(--terra);margin-bottom:18px;stroke-width:1.5}
+.fc h4{font-family:var(--serif);font-size:19px;font-weight:600;color:var(--ink);margin-bottom:8px}
+.fc p{font-size:14px;color:var(--muted);line-height:1.55}
+@media (max-width:880px){.fg-grid{grid-template-columns:1fr}}
+.pricing{max-width:1100px;margin:0 auto;padding:80px 32px}
+.pricing h2{font-family:var(--serif);font-size:clamp(32px,4.5vw,48px);font-weight:600;color:var(--ink);text-align:center;margin-bottom:16px;line-height:1.05;letter-spacing:-.02em}
+body.lang-am .pricing h2{font-family:var(--ethio)}
+.pr-lead{text-align:center;font-size:16px;color:var(--muted);margin-bottom:48px;max-width:600px;margin-left:auto;margin-right:auto}
+.pr-card{background:var(--bg);border:2px solid var(--terra);border-radius:20px;padding:48px 40px;max-width:560px;margin:0 auto}
+.pr-tag{display:inline-block;background:var(--terra-s);color:var(--terra-d);padding:5px 12px;border-radius:100px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px}
+.pr-trial{font-family:var(--serif);font-size:52px;font-weight:600;color:var(--ink);line-height:1;margin-bottom:6px}
+body.lang-am .pr-trial{font-family:var(--ethio)}
+.pr-after{background:var(--soft);padding:14px 18px;border-radius:10px;margin:28px 0;font-size:14px;display:flex;justify-content:space-between;align-items:center}
+.pr-feats{list-style:none;margin-bottom:32px}
+.pr-feats li{padding:10px 0;font-size:14.5px;color:var(--text);display:flex;gap:12px;line-height:1.45}
+.pr-feats li::before{content:'✓';color:var(--success);font-weight:700;flex-shrink:0}
+
+/* SETUP */
+.set{display:grid;grid-template-columns:280px 1fr;min-height:calc(100vh - 73px)}
+.set-side{background:var(--soft);border-right:1px solid var(--line);padding:32px 24px}
+.set-prog{background:var(--bg);border-radius:10px;padding:14px 16px;margin-bottom:24px;border:1px solid var(--line)}
+.set-prog-l{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.set-bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin-bottom:8px}
+.set-fill{height:100%;width:25%;background:var(--terra);transition:.4s}
+.set-list{list-style:none}
+.set-step{padding:12px 14px;border-radius:8px;margin-bottom:4px;cursor:pointer;display:flex;align-items:center;gap:12px;font-size:14px;color:var(--muted)}
+.set-step.active{background:var(--bg);color:var(--ink);font-weight:600;border:1px solid var(--line)}
+.set-step.done{color:var(--success)}
+.set-n{width:22px;height:22px;background:var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--muted);flex-shrink:0}
+.set-step.active .set-n{background:var(--terra);color:#fff}
+.set-step.done .set-n{background:var(--success);color:#fff}
+.set-main{padding:48px 56px;max-width:900px}
+.set-h1{font-family:var(--serif);font-size:36px;font-weight:600;color:var(--ink);margin-bottom:8px}
+body.lang-am .set-h1{font-family:var(--ethio)}
+.set-sub{font-size:15px;color:var(--muted);margin-bottom:32px}
+.f-sec{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:28px;margin-bottom:16px}
+.f-sec h3{font-family:var(--serif);font-size:18px;font-weight:600;color:var(--ink);margin-bottom:18px}
+.set-foot{margin-top:32px;display:flex;justify-content:space-between;gap:12px}
+.svc-tab{background:var(--bg);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:16px}
+.svc-tr{display:grid;grid-template-columns:1fr 100px 130px 100px 40px;gap:12px;padding:16px 20px;align-items:center;border-bottom:1px solid var(--line)}
+.svc-tr.hd{background:var(--soft);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.svc-ii{border:1px solid var(--line);border-radius:6px;padding:8px 10px;font-size:13.5px;background:var(--bg);width:100%;color:var(--ink)}
+.svc-ni{border:none;padding:8px 0;font-size:14.5px;font-weight:600;color:var(--ink);width:100%;background:transparent}
+.svc-no{border:none;padding:0;font-size:12.5px;color:var(--muted);width:100%;background:transparent;margin-top:2px}
+.del{width:28px;height:28px;border-radius:6px;background:var(--soft);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.add-svc{background:var(--bg);border:2px dashed var(--line);border-radius:12px;padding:16px;width:100%;cursor:pointer;font-size:14px;font-weight:600;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:8px}
+@media (max-width:880px){
+.set{grid-template-columns:1fr}.set-side{padding:16px}.set-list{display:flex;overflow-x:auto;gap:6px}.set-step{flex-shrink:0}
+.set-main{padding:24px 16px}.set-h1{font-size:28px}.svc-tr{grid-template-columns:1fr;gap:10px}.svc-tr.hd{display:none}
+}
+
+/* DASHBOARD */
+.dsh{display:grid;grid-template-columns:240px 1fr;min-height:calc(100vh - 73px)}
+.dsh-s{background:var(--soft);border-right:1px solid var(--line);padding:24px 16px}
+.dsh-u{display:flex;align-items:center;gap:12px;padding:12px;background:var(--bg);border:1px solid var(--line);border-radius:10px;margin-bottom:20px}
+.dsh-av{width:38px;height:38px;background:linear-gradient(135deg,#3D2818,#5C4033);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--serif);color:rgba(255,255,255,.6)}
+.nav-l{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:8px;color:var(--text);font-size:14px;font-weight:500;cursor:pointer;margin-bottom:2px}
+.nav-l:hover{background:rgba(0,0,0,.04)}
+.nav-l.active{background:var(--bg);color:var(--ink);font-weight:600;border:1px solid var(--line)}
+.nav-l svg{width:18px;height:18px;color:var(--muted);flex-shrink:0}
+.dsh-m{padding:32px 40px;max-width:1100px}
+.dsh-h1{font-family:var(--serif);font-size:32px;font-weight:600;color:var(--ink);margin-bottom:4px}
+body.lang-am .dsh-h1{font-family:var(--ethio)}
+.dsh-g{font-size:14px;color:var(--muted);margin-bottom:28px}
+.dsh-st{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
+.dsh-sc{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+.dsh-sl{font-size:12px;color:var(--muted);margin-bottom:6px}
+.dsh-sv{font-family:var(--serif);font-size:26px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.dsh-tr{font-size:11.5px;color:var(--success);font-weight:600}
+.dsh-c{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:24px;margin-bottom:16px}
+.dsh-c h3{font-family:var(--serif);font-size:18px;font-weight:600;color:var(--ink);margin-bottom:16px}
+.appt{padding:14px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:60px 1fr auto;gap:14px;align-items:center}
+.appt:last-child{border-bottom:none}
+.appt-t{background:var(--soft);border-radius:8px;padding:8px;text-align:center}
+.appt-d{font-size:11px;font-weight:700;color:var(--terra);text-transform:uppercase}
+.appt-h{font-family:var(--serif);font-size:16px;font-weight:600;color:var(--ink)}
+.appt-n{font-weight:600;color:var(--ink);font-size:14px}
+.appt-m{font-size:12.5px;color:var(--muted)}
+@media (max-width:880px){.dsh{grid-template-columns:1fr}.dsh-m{padding:24px 16px}.dsh-st{grid-template-columns:1fr 1fr}}
+
+/* FOOTER */
+footer{background:var(--ink);color:rgba(247,241,230,.78);margin-top:80px;padding:56px 32px 28px}
+.ft-in{max-width:1280px;margin:0 auto}
+.ft-g{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding-bottom:36px;border-bottom:1px solid rgba(247,241,230,.12)}
+.ft-g .logo{color:var(--cream)}
+.ft-g .logo-am{color:var(--saffron)}
+.ft-b p{font-size:13.5px;margin-top:14px;max-width:320px;line-height:1.55;color:rgba(247,241,230,.65)}
+.ft-c h5{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--saffron);margin-bottom:16px}
+.ft-c ul{list-style:none}
+.ft-c li{margin-bottom:10px;font-size:13.5px}
+.ft-c a:hover{color:var(--saffron)}
+.ft-bot{margin-top:24px;display:flex;justify-content:space-between;font-size:12.5px;color:rgba(247,241,230,.5);flex-wrap:wrap;gap:16px}
+.ft-lang{display:flex;gap:6px;background:rgba(247,241,230,.06);padding:4px;border-radius:100px}
+.ft-lang span{padding:6px 14px;border-radius:100px;font-size:12px;color:rgba(247,241,230,.7);cursor:pointer;font-weight:600}
+.ft-lang span.active{background:var(--saffron);color:var(--coffee)}
+.ft-lang .am{font-family:var(--ethio)}
+@media (max-width:880px){.ft-g{grid-template-columns:1fr 1fr;gap:32px}footer{padding:40px 20px 24px}}
+
+/* PAGES */
+.page{display:none}
+.page.active{display:block}
+
+/* DIASPORA / SALONS */
+.di-hero{background:var(--aubergine);color:#fff;padding:80px 32px;text-align:center}
+.di-hero h1{font-family:var(--serif);font-size:clamp(38px,5.5vw,60px);font-weight:600;line-height:1.02;letter-spacing:-.02em;margin-bottom:20px}
+body.lang-am .di-hero h1{font-family:var(--ethio)}
+.di-hero p{font-size:17px;opacity:.85;margin-bottom:32px;max-width:600px;margin-left:auto;margin-right:auto}
+.sa-hero{background:var(--coffee);color:#fff;padding:80px 32px;position:relative;overflow:hidden}
+.sa-hero .inner{max-width:1100px;margin:0 auto}
+.sa-hero h1{font-family:var(--serif);font-size:clamp(38px,5.5vw,60px);font-weight:600;line-height:1.02;letter-spacing:-.02em;color:var(--cream);margin-bottom:20px;max-width:900px}
+body.lang-am .sa-hero h1{font-family:var(--ethio)}
+.sa-hero p{font-size:17px;color:rgba(247,241,230,.85);max-width:600px;margin-bottom:32px}
+</style>
+</head>
+<body class="lang-en">
+
+<header>
+  <div class="hdr">
+    <button class="menu-btn" onclick="openMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+    <a class="logo" onclick="navigate('home')">QONJIT<span class="logo-am">ቆንጅት</span></a>
+    <div class="hdr-right">
+      <div class="lang-pill">
+        <span data-lang="en" class="active" onclick="setLang('en')">EN</span>
+        <span data-lang="am" class="am" onclick="setLang('am')">አማ</span>
+        <span data-lang="om" onclick="setLang('om')">OM</span>
+      </div>
+      <a class="login-link" onclick="navigate('login')" data-i18n="nav.login">Log in</a>
+      <a class="join-cta" onclick="navigate('pro-join')" data-i18n="nav.joinStylist">Join as stylist</a>
+    </div>
+  </div>
+</header>
+
+<div class="menu-ov" onclick="closeMenu()"></div>
+<aside class="side">
+  <button class="menu-close" onclick="closeMenu()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  <div class="menu-section">
+    <h6 data-i18n="menu.forStylists">For Stylists</h6>
+    <a onclick="navigate('pro-join');closeMenu()" data-i18n="nav.joinStylist">Join as stylist</a>
+    <a onclick="navigate('pro-join');closeMenu()" data-i18n="menu.pricing">Pricing</a>
+    <h6 data-i18n="menu.forSalons">For Salons</h6>
+    <a onclick="navigate('salons');closeMenu()" data-i18n="menu.listSalon">List your salon</a>
+    <h6 data-i18n="menu.forClients">For Clients</h6>
+    <a onclick="navigate('search');closeMenu()" data-i18n="menu.findStylist">Find a stylist</a>
+    <a onclick="navigate('diaspora');closeMenu()" data-i18n="menu.diaspora">Diaspora booking</a>
+    <h6>Qonjit</h6>
+    <a onclick="navigate('home');closeMenu()" data-i18n="menu.home">Home</a>
+    <a onclick="navigate('login');closeMenu()" data-i18n="nav.login">Log in</a>
+    <div class="menu-lang">
+      <div class="label" data-i18n="menu.language">Language</div>
+      <div class="menu-lang-row">
+        <span data-lang="en" class="active" onclick="setLang('en')">English</span>
+        <span data-lang="am" class="am" onclick="setLang('am')">አማርኛ</span>
+        <span data-lang="om" onclick="setLang('om')">Oromoo</span>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<main>
+
+<!-- HOME -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="hero-box">
+      <div>
+        <h1 class="hero-h" data-i18n="home.headline">Discover & book trusted beauty professionals in Addis.</h1>
+        <form class="sb" onsubmit="handleHomeSearch(event)">
+          <div class="sb-f">
+            <svg class="sb-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input id="home-q" data-i18n-placeholder="home.searchService" placeholder="Service, stylist or salon">
+          </div>
+          <div class="sb-d"></div>
+          <div class="sb-f">
+            <svg class="sb-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <input id="home-loc" data-i18n-placeholder="home.searchLoc" placeholder="Bole, Addis Ababa">
+          </div>
+          <button class="sb-btn" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+        </form>
+        <div class="grow">
+          <span data-i18n="home.growBiz">Grow your business with Qonjit</span>
+          <a class="grow-cta" onclick="navigate('pro-join')" data-i18n="nav.joinStylist">Join as stylist</a>
+        </div>
+      </div>
+      <div class="viz">
+        <div class="col a"></div>
+        <div class="col b"></div>
+        <div class="col c"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cnt">
+    <div class="st-row">
+      <h2 data-i18n="home.findByService">Find pros by service</h2>
+      <a class="see" onclick="navigate('search')" data-i18n="common.seeAll">See all →</a>
+    </div>
+    <div class="svc-grid" id="svc-grid"></div>
+  </section>
+
+  <section class="cnt">
+    <div class="st-row">
+      <h2 data-i18n="home.topPros">Top professionals near you</h2>
+      <a class="see" onclick="navigate('search')" data-i18n="common.seeAll">See all →</a>
+    </div>
+    <div class="pros" id="pros"></div>
+  </section>
+
+  <section class="cnt">
+    <div class="how">
+      <div class="how-i"><div class="how-n">1</div><div><h4 data-i18n="how.discover">Discover</h4><p data-i18n="how.discoverText">Search by service, stylist, or neighborhood.</p></div></div>
+      <div class="how-i"><div class="how-n">2</div><div><h4 data-i18n="how.book">Book</h4><p data-i18n="how.bookText">Pick your time, pay a small Telebirr deposit.</p></div></div>
+      <div class="how-i"><div class="how-n">3</div><div><h4 data-i18n="how.showup">Show up</h4><p data-i18n="how.showupText">Reminders via SMS + Telegram. Rebook with one tap.</p></div></div>
+    </div>
+  </section>
+
+  <section class="cnt">
+    <div class="biz">
+      <div>
+        <h2 data-i18n="biz.title">Set up your business on Qonjit.</h2>
+        <p data-i18n="biz.sub">Join the first 30 stylists in Addis. 21-day free trial. Free pro photoshoot.</p>
+        <a class="btn btn-d btn-lg" onclick="navigate('pro-join')" data-i18n="biz.cta">Set up my business</a>
+      </div>
+      <div class="biz-b">
+        <div class="biz-bi"><h4 data-i18n="biz.b1t">Grow your business</h4><p data-i18n="biz.b1d">Featured discovery + TikTok marketing.</p></div>
+        <div class="biz-bi"><h4 data-i18n="biz.b2t">Manage your business</h4><p data-i18n="biz.b2d">Calendar, clients, deposits in one place.</p></div>
+        <div class="biz-bi"><h4 data-i18n="biz.b3t">Get paid faster</h4><p data-i18n="biz.b3d">Telebirr deposits before the appointment.</p></div>
+        <div class="biz-bi"><h4 data-i18n="biz.b4t">21 days free</h4><p data-i18n="biz.b4d">0% commission. Pricing details after trial.</p></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- LOGIN -->
+<div class="page" id="page-login">
+  <div class="auth-w"><div class="auth-c">
+    <h1 class="auth-t" data-i18n="login.title">Welcome back</h1>
+    <p class="auth-s" data-i18n="login.sub">Log in to book, message stylists, and rebook your favorites.</p>
+    <button class="soc" onclick="alert('Google sign-in coming soon')" data-i18n="login.google">Continue with Google</button>
+    <div class="auth-d"><span data-i18n="common.or">or</span></div>
+    <form onsubmit="handleLogin(event)">
+      <div class="fg"><label class="fl" data-i18n="login.email">Email or phone</label><input class="fi" required></div>
+      <div class="fg"><label class="fl" data-i18n="login.pwd">Password</label><input type="password" class="fi" required></div>
+      <button type="submit" class="btn btn-p btn-full btn-lg" data-i18n="login.cta">Log in</button>
+    </form>
+    <div class="auth-f"><span data-i18n="login.noAcct">Don't have an account?</span> <a onclick="navigate('signup')" data-i18n="login.signup">Sign up free</a></div>
+  </div></div>
+</div>
+
+<!-- SIGNUP -->
+<div class="page" id="page-signup">
+  <div class="auth-w"><div class="auth-c">
+    <h1 class="auth-t" data-i18n="signup.title">Create your account</h1>
+    <p class="auth-s" data-i18n="signup.sub">Free forever. Book in 60 seconds, save favorites, rebook anytime.</p>
+    <form onsubmit="handleSignup(event)">
+      <div class="fr">
+        <div class="fg"><label class="fl" data-i18n="signup.first">First name</label><input class="fi" required></div>
+        <div class="fg"><label class="fl" data-i18n="signup.last">Last name</label><input class="fi" required></div>
+      </div>
+      <div class="fg"><label class="fl" data-i18n="signup.email">Email</label><input type="email" class="fi" required></div>
+      <div class="fg"><label class="fl" data-i18n="signup.phone">Phone</label><input type="tel" class="fi" placeholder="+251 9..." required></div>
+      <div class="fg"><label class="fl" data-i18n="signup.pwd">Password</label><input type="password" class="fi" required></div>
+      <button type="submit" class="btn btn-p btn-full btn-lg" data-i18n="signup.cta">Create account</button>
+    </form>
+    <div class="auth-f"><span data-i18n="signup.have">Already have an account?</span> <a onclick="navigate('login')" data-i18n="signup.login">Log in</a></div>
+  </div></div>
+</div>
+
+<!-- SEARCH -->
+<div class="page" id="page-search">
+  <div class="s-strip"><div class="s-inner">
+    <form class="s-pill" onsubmit="handleSearch(event)">
+      <input id="s-q" data-i18n-placeholder="home.searchService">
+      <div class="d"></div>
+      <input id="s-loc" data-i18n-placeholder="home.searchLoc">
+      <button type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+    </form>
+  </div></div>
+  <div class="f-row">
+    <button class="chip active" data-i18n="search.all">All services</button>
+    <button class="chip" data-i18n="services.braids">Braids</button>
+    <button class="chip" data-i18n="services.naturalHair">Natural hair</button>
+    <button class="chip" data-i18n="services.makeup">Makeup</button>
+    <button class="chip" data-i18n="services.nails">Nails</button>
+    <button class="chip" data-i18n="services.henna">Henna</button>
+    <button class="chip" data-i18n="services.bridal">Bridal</button>
+  </div>
+  <div class="r-head">
+    <div class="r-cnt" id="r-cnt" data-i18n="search.count">12 professionals in Addis Ababa</div>
+    <select class="sort">
+      <option data-i18n="search.recommended">Recommended</option>
+      <option data-i18n="search.topRated">Top rated</option>
+      <option data-i18n="search.closest">Closest first</option>
+    </select>
+  </div>
+  <div class="r-grid" id="r-grid"></div>
+</div>
+
+<!-- STYLIST -->
+<div class="page" id="page-stylist">
+  <div class="p-hero">
+    <div class="p-photo">
+      <div class="badge-pro"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg><span data-i18n="stylist.topPro">Top Pro</span></div>
+      <div class="p-init" id="st-init">HT</div>
+      <button class="vid"><svg viewBox="0 0 12 12" fill="currentColor" width="12" height="12"><polygon points="2 1 11 6 2 11"/></svg><span data-i18n="stylist.watchIntro">Watch intro · 30s</span></button>
+    </div>
+    <div class="p-info">
+      <h1><span id="st-name">Hanna Tadesse</span><span class="vb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span></h1>
+      <div class="p-meta">
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span id="st-area">Bole, Addis Ababa</span></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-i18n="stylist.responds">Usually responds in 30 min</span></div>
+      </div>
+      <div class="rate">
+        <span style="color:var(--ink);font-weight:600">★ ★ ★ ★ ★ <span style="margin-left:6px">5.0</span></span>
+        <span style="color:var(--muted)">(248 <span data-i18n="stylist.reviews">reviews</span>)</span>
+        <span class="book-cnt">1.2k <span data-i18n="stylist.bookings">bookings</span></span>
+      </div>
+      <p class="bio" data-i18n="stylist.bio">Specializing in protective styles, knotless braids, and natural hair care. 6 years of experience. Styles that hold up for weeks.</p>
+      <div>
+        <span class="tag" data-i18n="services.braids">Braids</span>
+        <span class="tag">Knotless</span>
+        <span class="tag" data-i18n="services.naturalHair">Natural hair</span>
+        <span class="tag">4C</span>
+      </div>
+      <div class="act-row">
+        <a class="btn btn-p btn-lg" onclick="document.querySelector('.tc').scrollIntoView({behavior:'smooth'})" data-i18n="stylist.bookAppt">Book an appointment</a>
+        <button class="btn btn-o" onclick="alert('Link copied')" data-i18n="stylist.share">Share</button>
+      </div>
+    </div>
+  </div>
+  <div class="tabs">
+    <div class="tab active" data-i18n="stylist.services">Services</div>
+    <div class="tab" data-i18n="stylist.portfolio">Portfolio</div>
+    <div class="tab" data-i18n="stylist.reviewsTab">Reviews (248)</div>
+    <div class="tab" data-i18n="stylist.about">About</div>
+  </div>
+  <div class="tc">
+    <div class="svc-list">
+      <div class="svc-row">
+        <div>
+          <div class="svc-n">Knotless Braids — Medium</div>
+          <div class="svc-inf"><span>4 <span data-i18n="common.hours">hours</span></span><span class="dot"></span><span data-i18n="stylist.mostPopular">Most popular</span><span class="dot"></span><span data-i18n="stylist.extIncl">Hair extensions included</span></div>
+        </div>
+        <div class="svc-p">1,500 <span data-i18n="common.birr">birr</span></div>
+        <a class="book-sm" onclick="bookSvc('knotless-medium',1500,240)" data-i18n="common.book">Book</a>
+      </div>
+      <div class="svc-row">
+        <div>
+          <div class="svc-n">Box Braids</div>
+          <div class="svc-inf"><span>5 <span data-i18n="common.hours">hours</span></span><span class="dot"></span><span data-i18n="stylist.extIncl">Hair extensions included</span></div>
+        </div>
+        <div class="svc-p">1,800 <span data-i18n="common.birr">birr</span></div>
+        <a class="book-sm" onclick="bookSvc('box-braids',1800,300)" data-i18n="common.book">Book</a>
+      </div>
+      <div class="svc-row">
+        <div>
+          <div class="svc-n">Hair wash + blowdry</div>
+          <div class="svc-inf"><span>1 <span data-i18n="common.hour">hour</span></span></div>
+        </div>
+        <div class="svc-p">400 <span data-i18n="common.birr">birr</span></div>
+        <a class="book-sm" onclick="bookSvc('wash',400,60)" data-i18n="common.book">Book</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOOK -->
+<div class="page" id="page-book">
+  <div class="bk">
+    <div>
+      <a class="back" onclick="navigate('stylist',{id:'hanna'})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg><span data-i18n="book.back">Back to stylist</span></a>
+      <div class="steps"><div class="step-i active" id="bs1"></div><div class="step-i" id="bs2"></div><div class="step-i" id="bs3"></div></div>
+
+      <div id="bk-1">
+        <h2 class="bk-t" data-i18n="book.s1t">Pick a date and time</h2>
+        <p class="bk-s" data-i18n="book.s1s">Real-time availability from her calendar.</p>
+        <h3 style="font-family:var(--serif);font-size:18px;margin-bottom:14px;color:var(--ink)">April 2026</h3>
+        <div class="dg">
+          <div class="dh">M</div><div class="dh">T</div><div class="dh">W</div><div class="dh">T</div><div class="dh">F</div><div class="dh">S</div><div class="dh">S</div>
+          <div class="dc past">1</div><div class="dc past">2</div><div class="dc past">3</div><div class="dc past">4</div><div class="dc past">5</div><div class="dc past">6</div><div class="dc past">7</div>
+          <div class="dc past">8</div><div class="dc past">9</div><div class="dc past">10</div><div class="dc past">11</div><div class="dc past">12</div><div class="dc past">13</div><div class="dc past">14</div>
+          <div class="dc past">15</div><div class="dc past">16</div><div class="dc past">17</div><div class="dc past">18</div><div class="dc past">19</div><div class="dc past">20</div><div class="dc past">21</div>
+          <div class="dc av">22</div><div class="dc av">23</div><div class="dc av sel">24</div><div class="dc av">25</div><div class="dc av">26</div><div class="dc av">27</div><div class="dc av">28</div>
+          <div class="dc av">29</div><div class="dc av">30</div>
+        </div>
+        <h3 style="font-family:var(--serif);font-size:16px;margin-bottom:14px;color:var(--ink)"><span data-i18n="book.times">Available times</span> — <span data-i18n="book.fri24">Friday, April 24</span></h3>
+        <div class="ts">
+          <div class="tslot un">9:00 AM</div>
+          <div class="tslot" onclick="selTime(this)">10:00 AM</div>
+          <div class="tslot sel" onclick="selTime(this)">11:30 AM</div>
+          <div class="tslot" onclick="selTime(this)">2:30 PM</div>
+          <div class="tslot" onclick="selTime(this)">4:00 PM</div>
+          <div class="tslot un">5:30 PM</div>
+        </div>
+        <button class="btn btn-p btn-lg btn-full" onclick="bookStep(2)" data-i18n="common.continue">Continue</button>
+      </div>
+
+      <div id="bk-2" style="display:none">
+        <h2 class="bk-t" data-i18n="book.s2t">Add details</h2>
+        <p class="bk-s" data-i18n="book.s2s">Help your stylist prepare.</p>
+        <div class="fg"><label class="fl" data-i18n="book.phone">Your phone number</label><input type="tel" class="fi" value="+251 911 234 567"></div>
+        <div class="fg"><label class="fl" data-i18n="book.note">Note for stylist (optional)</label><textarea class="fi" rows="4" data-i18n-placeholder="book.notePh" placeholder="Hair texture, length, references..."></textarea></div>
+        <div style="display:flex;gap:10px"><button class="btn btn-o" onclick="bookStep(1)" data-i18n="common.back">Back</button><button class="btn btn-p btn-lg" style="flex:1" onclick="bookStep(3)" data-i18n="book.toPay">Continue to payment</button></div>
+      </div>
+
+      <div id="bk-3" style="display:none">
+        <h2 class="bk-t" data-i18n="book.s3t">Pay deposit to confirm</h2>
+        <p class="bk-s" data-i18n="book.s3s">20% deposit holds your appointment. Rest paid in person.</p>
+        <div class="pay sel" onclick="selPay(this)"><div class="pay-i tb">TB</div><div style="flex:1"><div style="font-weight:600">Telebirr</div><div style="font-size:12px;color:var(--muted)" data-i18n="book.tbDesc">Pay from your mobile money wallet</div></div></div>
+        <div class="pay" onclick="selPay(this)"><div class="pay-i mp">M-P</div><div style="flex:1"><div style="font-weight:600">M-Pesa</div><div style="font-size:12px;color:var(--muted)" data-i18n="book.mpDesc">Pay from your Safaricom wallet</div></div></div>
+        <div class="pay" onclick="selPay(this)"><div class="pay-i cc">CC</div><div style="flex:1"><div style="font-weight:600" data-i18n="book.card">Credit or debit card</div><div style="font-size:12px;color:var(--muted)" data-i18n="book.cardDesc">For diaspora payments</div></div></div>
+        <div class="dep" style="margin-top:16px"><strong data-i18n="book.protected">You're protected.</strong> <span data-i18n="book.protText">If she doesn't show, deposit refunded in 24h.</span></div>
+        <div style="display:flex;gap:10px;margin-top:16px"><button class="btn btn-o" onclick="bookStep(2)" data-i18n="common.back">Back</button><button class="btn btn-p btn-lg" style="flex:1" onclick="confirmBooking()" data-i18n="book.payConfirm">Pay 300 birr deposit & confirm</button></div>
+      </div>
+
+      <div id="bk-ok" style="display:none">
+        <div class="succ">
+          <div class="succ-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <h2 class="succ-t" data-i18n="book.okTitle">You're confirmed.</h2>
+          <p style="color:var(--muted);margin-bottom:24px" data-i18n="book.okSub">SMS + Telegram reminders sent 24h and 1h before.</p>
+          <button class="btn btn-p btn-lg" onclick="navigate('home')" data-i18n="common.done">Done</button>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="sum">
+        <div class="sum-st"><div class="sum-av">HT</div><div><div style="font-family:var(--serif);font-size:17px;font-weight:600">Hanna Tadesse</div><div style="font-size:12.5px;color:var(--muted)">Bole · ★ 5.0 (248)</div></div></div>
+        <div class="sum-l"><span class="lb" data-i18n="book.service">Service</span><span class="vl" id="sum-svc">Knotless Braids</span></div>
+        <div class="sum-l"><span class="lb" data-i18n="book.date">Date</span><span class="vl">Fri, Apr 24</span></div>
+        <div class="sum-l"><span class="lb" data-i18n="book.time">Time</span><span class="vl">11:30 AM</span></div>
+        <div class="sum-tot"><span style="font-weight:600" data-i18n="book.total">Total</span><span class="vl" id="sum-tot">1,500 birr</span></div>
+        <div class="dep"><strong data-i18n="book.depToday">20% deposit today: 300 birr</strong><br><span data-i18n="book.depRest">Remaining 1,200 birr paid in person.</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRO JOIN -->
+<div class="page" id="page-pro-join">
+  <section class="pj-hero">
+    <div class="pj-inner">
+      <span class="eyebrow" data-i18n="pj.eye">For independent stylists</span>
+      <h1 data-i18n="pj.title">Your book. Your business. Your brand.</h1>
+      <p data-i18n="pj.sub">Build a professional booking page. Take Telebirr deposits. Manage clients, calendar, earnings — all in one place.</p>
+      <div class="pj-cta">
+        <a class="btn btn-p btn-lg" onclick="navigate('pro-setup')" data-i18n="pj.start">Start 21-day free trial</a>
+        <a class="btn btn-o btn-lg" onclick="document.querySelector('.pricing').scrollIntoView({behavior:'smooth'})" data-i18n="pj.seePrice">See pricing</a>
+      </div>
+      <div class="trial"><span class="d"></span><span data-i18n="pj.noCard">No credit card · 0% commission · Cancel anytime</span></div>
+    </div>
+  </section>
+  <div class="stats"><div class="stats-c">
+    <div class="stat"><div class="stat-n">10 min</div><div class="stat-l" data-i18n="pj.s1">to set up your profile</div></div>
+    <div class="stat"><div class="stat-n">0%</div><div class="stat-l" data-i18n="pj.s2">commission on bookings</div></div>
+    <div class="stat"><div class="stat-n">21 <span data-i18n="pj.days">days</span></div><div class="stat-l" data-i18n="pj.s3">free to try everything</div></div>
+  </div></div>
+  <section class="feats">
+    <h2 data-i18n="pj.featTitle">Everything you need to run your business.</h2>
+    <p class="lead" data-i18n="pj.featSub">Built for Ethiopian beauty professionals.</p>
+    <div class="fg-grid">
+      <div class="fc"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg><h4 data-i18n="pj.f1t">Real-time calendar</h4><p data-i18n="pj.f1d">Clients book themselves. Stop chasing DMs.</p></div>
+      <div class="fc"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg><h4 data-i18n="pj.f2t">Telebirr deposits</h4><p data-i18n="pj.f2d">20% upfront. No-shows drop to near zero.</p></div>
+      <div class="fc"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg><h4 data-i18n="pj.f3t">Video intro</h4><p data-i18n="pj.f3d">30 seconds. Clients see your work before booking.</p></div>
+      <div class="fc"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><h4 data-i18n="pj.f4t">Client database</h4><p data-i18n="pj.f4d">Private notes per client. Build loyalty.</p></div>
+      <div class="fc"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><h4 data-i18n="pj.f5t">Slot-fill alerts</h4><p data-i18n="pj.f5d">Cancellation? Favorite clients get first dibs.</p></div>
+      <div class="fc"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><h4 data-i18n="pj.f6t">Earnings dashboard</h4><p data-i18n="pj.f6d">Daily, weekly, monthly. Telebirr income record.</p></div>
+    </div>
+  </section>
+  <section class="pricing">
+    <h2 data-i18n="pr.title">Start free. Decide later.</h2>
+    <p class="pr-lead" data-i18n="pr.sub">21 days to try every feature. No credit card. No commission. Cancel anytime.</p>
+    <div class="pr-card">
+      <span class="pr-tag" data-i18n="pr.found">★ Founding cohort offer</span>
+      <div class="pr-trial" data-i18n="pr.trial">21 days free</div>
+      <p style="color:var(--muted)" data-i18n="pr.trialSub">Try every feature. No credit card required.</p>
+      <div class="pr-after"><span data-i18n="pr.after">After your trial ends</span><strong>250 <span data-i18n="common.birr">birr</span> / <span data-i18n="pr.month">month</span></strong></div>
+      <ul class="pr-feats">
+        <li data-i18n="pr.l1">0% commission — keep 100% of bookings, forever</li>
+        <li data-i18n="pr.l2">Verified profile + 30-second video intro</li>
+        <li data-i18n="pr.l3">Real-time booking calendar</li>
+        <li data-i18n="pr.l4">Telebirr deposit collection</li>
+        <li data-i18n="pr.l5">Service-specific shareable links</li>
+        <li data-i18n="pr.l6">Client database with private notes</li>
+        <li data-i18n="pr.l7">Last-minute slot fill notifications</li>
+        <li data-i18n="pr.l8">Verified review system</li>
+        <li data-i18n="pr.l9">Featured in Qonjit discovery</li>
+      </ul>
+      <a class="btn btn-p btn-lg btn-full" onclick="navigate('pro-setup')" data-i18n="pr.cta">Start your free trial</a>
+    </div>
+  </section>
+</div>
+
+<!-- PRO SETUP -->
+<div class="page" id="page-pro-setup">
+  <div class="set">
+    <aside class="set-side">
+      <div class="set-prog">
+        <div class="set-prog-l" data-i18n="set.prog">Setup progress</div>
+        <div class="set-bar"><div class="set-fill" id="set-fill"></div></div>
+        <div style="font-size:12.5px;font-weight:600" id="set-text"><span data-i18n="set.step">Step</span> 1 / 4</div>
+      </div>
+      <ul class="set-list">
+        <li class="set-step active" data-step="1" onclick="setupGo(1)"><span class="set-n">1</span><span data-i18n="set.s1">About you</span></li>
+        <li class="set-step" data-step="2" onclick="setupGo(2)"><span class="set-n">2</span><span data-i18n="set.s2">Services & pricing</span></li>
+        <li class="set-step" data-step="3" onclick="setupGo(3)"><span class="set-n">3</span><span data-i18n="set.s3">Portfolio photos</span></li>
+        <li class="set-step" data-step="4" onclick="setupGo(4)"><span class="set-n">4</span><span data-i18n="set.s4">Hours & location</span></li>
+      </ul>
+    </aside>
+    <main class="set-main">
+      <div id="set-1">
+        <h1 class="set-h1" data-i18n="set.aboutT">Tell us about you.</h1>
+        <p class="set-sub" data-i18n="set.aboutS">Build your public profile. Edit any of this later.</p>
+        <div class="f-sec">
+          <h3 data-i18n="set.basics">Basics</h3>
+          <div class="fr">
+            <div class="fg"><label class="fl" data-i18n="set.name">Full name</label><input class="fi" placeholder="Hanna Tadesse"></div>
+            <div class="fg"><label class="fl" data-i18n="set.phone">Phone</label><input type="tel" class="fi" value="+251 "></div>
+          </div>
+          <div class="fg"><label class="fl" data-i18n="set.email">Email</label><input type="email" class="fi"></div>
+          <div class="fg"><label class="fl" data-i18n="set.bio">Short bio</label><textarea class="fi" rows="3" data-i18n-placeholder="set.bioPh" placeholder="Tell clients about your work, your style..."></textarea></div>
+        </div>
+        <div class="set-foot"><div></div><button class="btn btn-p btn-lg" onclick="setupGo(2)" data-i18n="common.continue">Continue</button></div>
+      </div>
+
+      <div id="set-2" style="display:none">
+        <h1 class="set-h1" data-i18n="set.svcT">Set up your services.</h1>
+        <p class="set-sub" data-i18n="set.svcS">List every service with price and duration. Add notes so clients know what's included.</p>
+        <div class="svc-tab" id="svc-edit">
+          <div class="svc-tr hd">
+            <div data-i18n="set.colName">Service & note</div>
+            <div data-i18n="set.colDur">Duration</div>
+            <div data-i18n="set.colPrice">Price (birr)</div>
+            <div data-i18n="set.colVis">Visibility</div>
+            <div></div>
+          </div>
+          <div class="svc-tr">
+            <div><input class="svc-ni" value="Knotless Braids — Medium"><input class="svc-no" value="Hair extensions included. Most popular."></div>
+            <input class="svc-ii" value="4 hours">
+            <input class="svc-ii" value="1500">
+            <select class="svc-ii"><option data-i18n="set.public">Public</option><option data-i18n="set.private">Private link</option></select>
+            <button class="del" onclick="this.closest('.svc-tr').remove()">✕</button>
+          </div>
+          <div class="svc-tr">
+            <div><input class="svc-ni" value="Box Braids"><input class="svc-no" value="Hair extensions included."></div>
+            <input class="svc-ii" value="5 hours">
+            <input class="svc-ii" value="1800">
+            <select class="svc-ii"><option>Public</option><option>Private link</option></select>
+            <button class="del" onclick="this.closest('.svc-tr').remove()">✕</button>
+          </div>
+        </div>
+        <button class="add-svc" onclick="addSvc()">+ <span data-i18n="set.addSvc">Add another service</span></button>
+        <div class="set-foot"><button class="btn btn-o" onclick="setupGo(1)" data-i18n="common.back">Back</button><button class="btn btn-p btn-lg" onclick="setupGo(3)" data-i18n="common.continue">Continue</button></div>
+      </div>
+
+      <div id="set-3" style="display:none">
+        <h1 class="set-h1" data-i18n="set.phT">Show your work.</h1>
+        <p class="set-sub" data-i18n="set.phS">Upload up to 9 photos and a 30-second intro video. Founding cohort gets a free pro photoshoot.</p>
+        <div class="f-sec">
+          <h3 data-i18n="set.video">30-second video intro</h3>
+          <div style="aspect-ratio:16/9;border:2px dashed var(--line);border-radius:10px;padding:28px;text-align:center;cursor:pointer;background:var(--soft);display:flex;align-items:center;justify-content:center;flex-direction:column">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="40" height="40" style="color:var(--muted);margin-bottom:8px"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+            <span data-i18n="set.uploadVid">Upload video · max 30 sec</span>
+          </div>
+        </div>
+        <div class="set-foot"><button class="btn btn-o" onclick="setupGo(2)" data-i18n="common.back">Back</button><button class="btn btn-p btn-lg" onclick="setupGo(4)" data-i18n="common.continue">Continue</button></div>
+      </div>
+
+      <div id="set-4" style="display:none">
+        <h1 class="set-h1" data-i18n="set.hT">Your hours and location.</h1>
+        <p class="set-sub" data-i18n="set.hS">When you're available and where clients find you.</p>
+        <div class="f-sec">
+          <h3 data-i18n="set.loc">Where do you work?</h3>
+          <div class="fg"><select class="fi"><option data-i18n="set.locHome">Home studio (clients come to me)</option><option data-i18n="set.locMobile">I travel to clients</option><option data-i18n="set.locRent">I rent a chair in a salon</option><option data-i18n="set.locOwn">I own a salon/studio</option></select></div>
+          <div class="fg"><label class="fl" data-i18n="set.nbhd">Neighborhood</label><select class="fi"><option>Bole</option><option>Megenagna</option><option>Kazanchis</option><option>Ayat</option><option>CMC</option><option>Kotebe</option><option>Lebu</option></select></div>
+        </div>
+        <div class="set-foot"><button class="btn btn-o" onclick="setupGo(3)" data-i18n="common.back">Back</button><button class="btn btn-p btn-lg" onclick="finishSetup()" data-i18n="set.finish">Finish & publish</button></div>
+      </div>
+
+      <div id="set-done" style="display:none;text-align:center;padding:60px 20px">
+        <div class="succ-i" style="margin:0 auto 24px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <h1 style="font-family:var(--serif);font-size:36px;margin-bottom:14px" data-i18n="set.doneT">Your profile is live.</h1>
+        <p style="color:var(--muted);margin-bottom:32px" data-i18n="set.doneS">21-day free trial started. Share your booking link.</p>
+        <button class="btn btn-p btn-lg" onclick="navigate('pro-dashboard')" data-i18n="set.toDash">Go to dashboard</button>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- PRO DASHBOARD -->
+<div class="page" id="page-pro-dashboard">
+  <div class="dsh">
+    <aside class="dsh-s">
+      <div class="dsh-u"><div class="dsh-av">HT</div><div><div style="font-weight:600;font-size:13.5px">Hanna Tadesse</div><div style="font-size:11.5px;color:var(--terra);font-weight:600" data-i18n="dsh.trial">Trial · 18 days left</div></div></div>
+      <a class="nav-l active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg><span data-i18n="dsh.overview">Overview</span></a>
+      <a class="nav-l"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg><span data-i18n="dsh.calendar">Calendar</span></a>
+      <a class="nav-l"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span data-i18n="dsh.bookings">Bookings</span></a>
+      <a class="nav-l"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span data-i18n="dsh.services">Services</span></a>
+      <a class="nav-l"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span data-i18n="dsh.earnings">Earnings</span></a>
+    </aside>
+    <main class="dsh-m">
+      <h1 class="dsh-h1"><span data-i18n="dsh.hello">Good morning,</span> Hanna</h1>
+      <p class="dsh-g"><span data-i18n="dsh.youHave">You have</span> 3 <span data-i18n="dsh.apptToday">appointments today</span></p>
+      <div class="dsh-st">
+        <div class="dsh-sc"><div class="dsh-sl" data-i18n="dsh.wkBook">This week's bookings</div><div class="dsh-sv">12</div><div class="dsh-tr">↑ 4 <span data-i18n="dsh.vsLast">vs last week</span></div></div>
+        <div class="dsh-sc"><div class="dsh-sl" data-i18n="dsh.wkEarn">This week's earnings</div><div class="dsh-sv">18,400 <span style="font-family:var(--sans);font-size:14px" data-i18n="common.birr">birr</span></div><div class="dsh-tr">↑ 22%</div></div>
+        <div class="dsh-sc"><div class="dsh-sl" data-i18n="dsh.views">Profile views (7d)</div><div class="dsh-sv">347</div><div class="dsh-tr">↑ 89</div></div>
+        <div class="dsh-sc"><div class="dsh-sl" data-i18n="dsh.rating">Average rating</div><div class="dsh-sv">5.0</div><div class="dsh-tr" style="color:var(--muted)">248 <span data-i18n="dsh.revs">reviews</span></div></div>
+      </div>
+      <div class="dsh-c">
+        <h3 data-i18n="dsh.upcoming">Upcoming appointments</h3>
+        <div class="appt"><div class="appt-t"><div class="appt-d" data-i18n="dsh.today">Today</div><div class="appt-h">11:30</div></div><div><div class="appt-n">Selam Mekonen</div><div class="appt-m">Knotless Braids · 4h · 1,500 <span data-i18n="common.birr">birr</span></div></div><button class="btn btn-o" style="padding:6px 12px;font-size:12px" data-i18n="dsh.msg">Message</button></div>
+        <div class="appt"><div class="appt-t"><div class="appt-d" data-i18n="dsh.today">Today</div><div class="appt-h">4:00</div></div><div><div class="appt-n">Mahder Bekele</div><div class="appt-m">Box Braids · 5h · 1,800 <span data-i18n="common.birr">birr</span> · <span data-i18n="dsh.returning">Returning</span></div></div><button class="btn btn-o" style="padding:6px 12px;font-size:12px" data-i18n="dsh.msg">Message</button></div>
+        <div class="appt"><div class="appt-t"><div class="appt-d" data-i18n="dsh.tomorrow">Tomorrow</div><div class="appt-h">10:00</div></div><div><div class="appt-n">Lily Kassahun</div><div class="appt-m">Twists · 4h · 1,400 <span data-i18n="common.birr">birr</span></div></div><button class="btn btn-o" style="padding:6px 12px;font-size:12px" data-i18n="dsh.msg">Message</button></div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- DIASPORA -->
+<div class="page" id="page-diaspora">
+  <section class="di-hero">
+    <span class="eyebrow" style="background:rgba(255,255,255,.12)" data-i18n="di.eye">For the Ethiopian diaspora</span>
+    <h1 data-i18n="di.title">From London to Bole in 60 seconds.</h1>
+    <p data-i18n="di.sub">Book a verified stylist for your visit home — or gift a salon day to family. Pay in your local currency.</p>
+    <button class="btn btn-p btn-lg" onclick="navigate('search')" data-i18n="di.cta">Find a stylist in Addis</button>
+  </section>
+  <section class="cnt" style="text-align:center">
+    <h2 style="font-family:var(--serif);font-size:36px;font-weight:600;margin-bottom:32px" data-i18n="di.featT">Three things only Qonjit does.</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+      <div class="dsh-c" style="text-align:left"><h3 data-i18n="di.f1t">Pay in your currency</h3><p style="color:var(--muted)" data-i18n="di.f1d">USD, GBP, EUR, AED, CAD. Stylist gets paid in birr.</p></div>
+      <div class="dsh-c" style="text-align:left"><h3 data-i18n="di.f2t">Pre-book before you land</h3><p style="color:var(--muted)" data-i18n="di.f2d">Lock in appointments weeks before you fly.</p></div>
+      <div class="dsh-c" style="text-align:left"><h3 data-i18n="di.f3t">Gift a salon day</h3><p style="color:var(--muted)" data-i18n="di.f3d">Send a confirmed booking voucher via WhatsApp.</p></div>
+    </div>
+  </section>
+</div>
+
+<!-- SALONS -->
+<div class="page" id="page-salons">
+  <section class="sa-hero">
+    <div class="inner">
+      <span class="eyebrow" style="background:var(--saffron);color:var(--coffee)" data-i18n="sa.eye">For salons & spas</span>
+      <h1 data-i18n="sa.title">Fill every chair. End the phone-call chaos.</h1>
+      <p data-i18n="sa.sub">List your salon. Take bookings 24/7. Eliminate no-shows with Telebirr deposits. Free to list — pay only when we bring you new clients.</p>
+      <button class="btn btn-p btn-lg" onclick="navigate('signup')" data-i18n="sa.cta">List my salon for free</button>
+    </div>
+  </section>
+  <section class="pricing">
+    <h2 data-i18n="sa.prT">Pay only when we deliver clients.</h2>
+    <p class="pr-lead" data-i18n="sa.prS">No upfront fee. No monthly subscription. We earn when you do.</p>
+    <div class="pr-card" style="border-color:var(--coffee)">
+      <ul class="pr-feats">
+        <li><strong data-i18n="sa.l1t">Free to list</strong> — <span data-i18n="sa.l1d">no upfront cost</span></li>
+        <li><strong data-i18n="sa.l2t">15% commission</strong> — <span data-i18n="sa.l2d">only on new clients we bring you</span></li>
+        <li><strong data-i18n="sa.l3t">0% on returning clients</strong> — <span data-i18n="sa.l3d">they're yours, forever</span></li>
+        <li><strong data-i18n="sa.l4t">Telebirr deposits</strong> — <span data-i18n="sa.l4d">eliminate no-shows</span></li>
+        <li><strong data-i18n="sa.l5t">Diaspora-bookable</strong> — <span data-i18n="sa.l5d">clients pre-book from abroad</span></li>
+      </ul>
+      <button class="btn btn-p btn-lg btn-full" onclick="navigate('signup')" data-i18n="sa.cta">List my salon for free</button>
+    </div>
+  </section>
+</div>
+
+</main>
+
+<footer>
+  <div class="ft-in">
+    <div class="ft-g">
+      <div class="ft-b">
+        <a class="logo" onclick="navigate('home')">QONJIT<span class="logo-am">ቆንጅት</span></a>
+        <p data-i18n="ft.tag">Ethiopia's first verified beauty marketplace.</p>
+      </div>
+      <div class="ft-c"><h5 data-i18n="ft.stylists">For Stylists</h5><ul><li><a onclick="navigate('pro-join')" data-i18n="nav.joinStylist">Join Qonjit</a></li><li><a onclick="navigate('pro-join')" data-i18n="menu.pricing">Pricing</a></li></ul></div>
+      <div class="ft-c"><h5 data-i18n="ft.clients">For Clients</h5><ul><li><a onclick="navigate('search')" data-i18n="menu.findStylist">Find a stylist</a></li><li><a onclick="navigate('diaspora')" data-i18n="menu.diaspora">Diaspora</a></li></ul></div>
+      <div class="ft-c"><h5>Qonjit</h5><ul><li><a onclick="navigate('home')" data-i18n="menu.home">Home</a></li><li><a onclick="navigate('login')" data-i18n="nav.login">Log in</a></li></ul></div>
+    </div>
+    <div class="ft-bot">
+      <div>© 2026 Qonjit · <span data-i18n="ft.made">Made in Addis Ababa</span></div>
+      <div class="ft-lang">
+        <span data-lang="en" class="active" onclick="setLang('en')">English</span>
+        <span data-lang="am" class="am" onclick="setLang('am')">አማርኛ</span>
+        <span data-lang="om" onclick="setLang('om')">Afaan Oromoo</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ===== TRANSLATIONS ===== */
+const i18n = {
+  en: {
+    'nav.login':'Log in','nav.joinStylist':'Join as stylist',
+    'menu.forStylists':'For Stylists','menu.forSalons':'For Salons','menu.forClients':'For Clients',
+    'menu.findStylist':'Find a stylist','menu.listSalon':'List your salon','menu.diaspora':'Diaspora booking',
+    'menu.home':'Home','menu.pricing':'Pricing','menu.language':'Language',
+    'common.seeAll':'See all →','common.or':'or','common.continue':'Continue','common.back':'Back',
+    'common.done':'Done','common.book':'Book','common.birr':'birr','common.hour':'hour','common.hours':'hours',
+    'home.headline':'Discover & book trusted beauty professionals in Addis.',
+    'home.searchService':'Service, stylist or salon','home.searchLoc':'Bole, Addis Ababa',
+    'home.growBiz':'Grow your business with Qonjit',
+    'home.findByService':'Find pros by service','home.topPros':'Top professionals near you',
+    'how.discover':'Discover','how.discoverText':'Search by service, stylist, or neighborhood.',
+    'how.book':'Book','how.bookText':'Pick your time, pay a small Telebirr deposit.',
+    'how.showup':'Show up','how.showupText':'Reminders via SMS + Telegram. Rebook with one tap.',
+    'biz.title':'Set up your business on Qonjit.','biz.sub':'Join the first 30 stylists in Addis. 21-day free trial. Free pro photoshoot.',
+    'biz.cta':'Set up my business',
+    'biz.b1t':'Grow your business','biz.b1d':'Featured discovery + TikTok marketing.',
+    'biz.b2t':'Manage your business','biz.b2d':'Calendar, clients, deposits in one place.',
+    'biz.b3t':'Get paid faster','biz.b3d':'Telebirr deposits before the appointment.',
+    'biz.b4t':'21 days free','biz.b4d':'0% commission. Pricing details after trial.',
+    'login.title':'Welcome back','login.sub':'Log in to book, message stylists, and rebook your favorites.',
+    'login.google':'Continue with Google','login.email':'Email or phone','login.pwd':'Password',
+    'login.cta':'Log in','login.noAcct':"Don't have an account?",'login.signup':'Sign up free',
+    'signup.title':'Create your account','signup.sub':'Free forever. Book in 60 seconds.',
+    'signup.first':'First name','signup.last':'Last name','signup.email':'Email','signup.phone':'Phone',
+    'signup.pwd':'Password','signup.cta':'Create account','signup.have':'Already have an account?','signup.login':'Log in',
+    'search.all':'All services','search.count':'12 professionals in Addis Ababa',
+    'search.recommended':'Recommended','search.topRated':'Top rated','search.closest':'Closest first',
+    'services.braids':'Braids','services.naturalHair':'Natural hair','services.haircut':'Haircut',
+    'services.makeup':'Makeup','services.nails':'Nails','services.henna':'Henna',
+    'services.locs':'Locs','services.bridal':'Bridal','services.eyelashes':'Eyelashes',
+    'services.weaves':'Weaves','services.silkPress':'Silk Press','services.mensHaircut':"Men's Haircut",
+    'stylist.topPro':'Top Pro','stylist.watchIntro':'Watch intro · 30s','stylist.responds':'Usually responds in 30 min',
+    'stylist.reviews':'reviews','stylist.bookings':'bookings','stylist.reviewsTab':'Reviews (248)',
+    'stylist.bio':'Specializing in protective styles, knotless braids, and natural hair care. 6 years of experience. Styles that hold up for weeks.',
+    'stylist.bookAppt':'Book an appointment','stylist.share':'Share',
+    'stylist.services':'Services','stylist.portfolio':'Portfolio','stylist.about':'About',
+    'stylist.mostPopular':'Most popular','stylist.extIncl':'Hair extensions included',
+    'book.back':'Back to stylist',
+    'book.s1t':'Pick a date and time','book.s1s':"Real-time availability from her calendar.",
+    'book.times':'Available times','book.fri24':'Friday, April 24',
+    'book.s2t':'Add details','book.s2s':'Help your stylist prepare.',
+    'book.phone':'Your phone number','book.note':'Note for stylist (optional)',
+    'book.notePh':'Hair texture, length, references...','book.toPay':'Continue to payment',
+    'book.s3t':'Pay deposit to confirm','book.s3s':'20% deposit holds your appointment. Rest paid in person.',
+    'book.tbDesc':'Pay from your mobile money wallet','book.mpDesc':'Pay from your Safaricom wallet',
+    'book.card':'Credit or debit card','book.cardDesc':'For diaspora payments',
+    'book.protected':"You're protected.",'book.protText':"If she doesn't show, deposit refunded in 24h.",
+    'book.payConfirm':'Pay 300 birr deposit & confirm','book.okTitle':"You're confirmed.",
+    'book.okSub':'SMS + Telegram reminders sent 24h and 1h before.',
+    'book.service':'Service','book.date':'Date','book.time':'Time','book.total':'Total',
+    'book.depToday':'20% deposit today: 300 birr','book.depRest':'Remaining 1,200 birr paid in person.',
+    'pj.eye':'For independent stylists','pj.title':'Your book. Your business. Your brand.',
+    'pj.sub':'Build a professional booking page. Take Telebirr deposits. Manage clients, calendar, earnings — all in one place.',
+    'pj.start':'Start 21-day free trial','pj.seePrice':'See pricing','pj.noCard':'No credit card · 0% commission · Cancel anytime',
+    'pj.days':'days','pj.s1':'to set up your profile','pj.s2':'commission on bookings','pj.s3':'free to try everything',
+    'pj.featTitle':'Everything you need to run your business.','pj.featSub':'Built for Ethiopian beauty professionals.',
+    'pj.f1t':'Real-time calendar','pj.f1d':'Clients book themselves. Stop chasing DMs.',
+    'pj.f2t':'Telebirr deposits','pj.f2d':'20% upfront. No-shows drop to near zero.',
+    'pj.f3t':'Video intro','pj.f3d':'30 seconds. Clients see your work before booking.',
+    'pj.f4t':'Client database','pj.f4d':'Private notes per client. Build loyalty.',
+    'pj.f5t':'Slot-fill alerts','pj.f5d':'Cancellation? Favorite clients get first dibs.',
+    'pj.f6t':'Earnings dashboard','pj.f6d':'Daily, weekly, monthly. Telebirr income record.',
+    'pr.title':'Start free. Decide later.','pr.sub':'21 days to try every feature. No credit card. No commission. Cancel anytime.',
+    'pr.found':'★ Founding cohort offer','pr.trial':'21 days free','pr.trialSub':'Try every feature. No credit card required.',
+    'pr.after':'After your trial ends','pr.month':'month',
+    'pr.l1':'0% commission — keep 100% of bookings, forever',
+    'pr.l2':'Verified profile + 30-second video intro',
+    'pr.l3':'Real-time booking calendar',
+    'pr.l4':'Telebirr deposit collection',
+    'pr.l5':'Service-specific shareable links',
+    'pr.l6':'Client database with private notes',
+    'pr.l7':'Last-minute slot fill notifications',
+    'pr.l8':'Verified review system',
+    'pr.l9':'Featured in Qonjit discovery',
+    'pr.cta':'Start your free trial',
+    'set.prog':'Setup progress','set.step':'Step',
+    'set.s1':'About you','set.s2':'Services & pricing','set.s3':'Portfolio photos','set.s4':'Hours & location',
+    'set.aboutT':'Tell us about you.','set.aboutS':'Build your public profile. Edit any of this later.',
+    'set.basics':'Basics','set.name':'Full name','set.phone':'Phone','set.email':'Email','set.bio':'Short bio',
+    'set.bioPh':'Tell clients about your work, your style...',
+    'set.svcT':'Set up your services.','set.svcS':"List every service with price and duration. Add notes so clients know what's included.",
+    'set.colName':'Service & note','set.colDur':'Duration','set.colPrice':'Price (birr)','set.colVis':'Visibility',
+    'set.public':'Public','set.private':'Private link','set.addSvc':'Add another service',
+    'set.phT':'Show your work.','set.phS':'Upload up to 9 photos and a 30-second intro video. Founding cohort gets a free pro photoshoot.',
+    'set.video':'30-second video intro','set.uploadVid':'Upload video · max 30 sec',
+    'set.hT':'Your hours and location.','set.hS':"When you're available and where clients find you.",
+    'set.loc':'Where do you work?','set.locHome':'Home studio (clients come to me)','set.locMobile':'I travel to clients',
+    'set.locRent':'I rent a chair in a salon','set.locOwn':'I own a salon/studio','set.nbhd':'Neighborhood',
+    'set.finish':'Finish & publish','set.doneT':'Your profile is live.','set.doneS':'21-day free trial started. Share your booking link.','set.toDash':'Go to dashboard',
+    'dsh.trial':'Trial · 18 days left','dsh.overview':'Overview','dsh.calendar':'Calendar',
+    'dsh.bookings':'Bookings','dsh.services':'Services','dsh.earnings':'Earnings',
+    'dsh.hello':'Good morning,','dsh.youHave':'You have','dsh.apptToday':'appointments today',
+    'dsh.wkBook':"This week's bookings",'dsh.wkEarn':"This week's earnings",'dsh.vsLast':'vs last week',
+    'dsh.views':'Profile views (7d)','dsh.rating':'Average rating','dsh.revs':'reviews',
+    'dsh.upcoming':'Upcoming appointments','dsh.today':'Today','dsh.tomorrow':'Tomorrow',
+    'dsh.returning':'Returning','dsh.msg':'Message',
+    'di.eye':'For the Ethiopian diaspora','di.title':'From London to Bole in 60 seconds.',
+    'di.sub':'Book a verified stylist for your visit home — or gift a salon day to family. Pay in your local currency.',
+    'di.cta':'Find a stylist in Addis','di.featT':'Three things only Qonjit does.',
+    'di.f1t':'Pay in your currency','di.f1d':'USD, GBP, EUR, AED, CAD. Stylist gets paid in birr.',
+    'di.f2t':'Pre-book before you land','di.f2d':'Lock in appointments weeks before you fly.',
+    'di.f3t':'Gift a salon day','di.f3d':'Send a confirmed booking voucher via WhatsApp.',
+    'sa.eye':'For salons & spas','sa.title':'Fill every chair. End the phone-call chaos.',
+    'sa.sub':'List your salon. Take bookings 24/7. Eliminate no-shows with Telebirr deposits. Free to list — pay only when we bring you new clients.',
+    'sa.cta':'List my salon for free','sa.prT':'Pay only when we deliver clients.','sa.prS':'No upfront fee. No monthly subscription. We earn when you do.',
+    'sa.l1t':'Free to list','sa.l1d':'no upfront cost',
+    'sa.l2t':'15% commission','sa.l2d':'only on new clients we bring you',
+    'sa.l3t':'0% on returning clients','sa.l3d':"they're yours, forever",
+    'sa.l4t':'Telebirr deposits','sa.l4d':'eliminate no-shows',
+    'sa.l5t':'Diaspora-bookable','sa.l5d':'clients pre-book from abroad',
+    'ft.tag':"Ethiopia's first verified beauty marketplace.",'ft.stylists':'For Stylists','ft.clients':'For Clients','ft.made':'Made in Addis Ababa'
+  },
+  am: {
+    'nav.login':'ግባ','nav.joinStylist':'እንደ ስታይሊስት ይቀላቀሉ',
+    'menu.forStylists':'ለስታይሊስቶች','menu.forSalons':'ለሳሎኖች','menu.forClients':'ለደንበኞች',
+    'menu.findStylist':'ስታይሊስት ያግኙ','menu.listSalon':'ሳሎንዎን ይዘርዝሩ','menu.diaspora':'ከውጭ ሀገር ቦታ ማስያዝ',
+    'menu.home':'መነሻ','menu.pricing':'ዋጋ','menu.language':'ቋንቋ',
+    'common.seeAll':'ሁሉንም →','common.or':'ወይም','common.continue':'ቀጥል','common.back':'ተመለስ',
+    'common.done':'ተጠናቅቋል','common.book':'ቦታ ያዝ','common.birr':'ብር','common.hour':'ሰዓት','common.hours':'ሰዓቶች',
+    'home.headline':'በአዲስ አበባ የተረጋገጡ የውበት ባለሙያዎችን ያግኙ።',
+    'home.searchService':'አገልግሎት፣ ስታይሊስት ወይም ሳሎን','home.searchLoc':'ቦሌ፣ አዲስ አበባ',
+    'home.growBiz':'ስራዎን በቆንጅት ያሳድጉ',
+    'home.findByService':'በአገልግሎት ያግኙ','home.topPros':'በአቅራቢያዎ ያሉ ምርጥ ባለሙያዎች',
+    'how.discover':'ያግኙ','how.discoverText':'በአገልግሎት፣ በስታይሊስት፣ ወይም በሰፈር ይፈልጉ።',
+    'how.book':'ቦታ ያዙ','how.bookText':'ሰዓትዎን ይምረጡ፣ ትንሽ የቴሌብር ቀጥሮ ይክፈሉ።',
+    'how.showup':'ይምጡ','how.showupText':'በኤስኤምኤስ እና በቴሌግራም ማስታወሻዎች።',
+    'biz.title':'ስራዎን በቆንጅት ላይ ያቋቁሙ።','biz.sub':'በአዲስ አበባ የመጀመሪያ 30 ስታይሊስቶችን ይቀላቀሉ። 21 ቀን ነጻ ሙከራ።',
+    'biz.cta':'ስራዬን አቋቁም',
+    'biz.b1t':'ስራዎን ያሳድጉ','biz.b1d':'በቆንጅት ግኝት + TikTok ግብይት ውስጥ ይታያሉ።',
+    'biz.b2t':'ስራዎን ያስተዳድሩ','biz.b2d':'ቀን መቁጠሪያ፣ ደንበኞች፣ ቀጥሮዎች በአንድ ቦታ።',
+    'biz.b3t':'በፍጥነት ይከፈሉ','biz.b3d':'ቴሌብር ቀጥሮ ከቀጠሮው በፊት ይሰበሰባል።',
+    'biz.b4t':'21 ቀን ነጻ','biz.b4d':'0% ኮሚሽን። ዋጋ ከሙከራ በኋላ።',
+    'login.title':'እንኳን ደህና መጡ','login.sub':'ለመመዝገብ እና ተወዳጆችዎን እንደገና ለማዘዝ ይግቡ።',
+    'login.google':'በGoogle ይቀጥሉ','login.email':'ኢሜይል ወይም ስልክ','login.pwd':'የይለፍ ቃል',
+    'login.cta':'ግባ','login.noAcct':'መለያ የለዎትም?','login.signup':'በነጻ ይመዝገቡ',
+    'signup.title':'መለያዎን ይፍጠሩ','signup.sub':'ሁልጊዜም ነጻ። በ60 ሰከንድ ቦታ ይያዙ።',
+    'signup.first':'የመጀመሪያ ስም','signup.last':'የአያት ስም','signup.email':'ኢሜይል','signup.phone':'ስልክ',
+    'signup.pwd':'የይለፍ ቃል','signup.cta':'መለያ ፍጠር','signup.have':'መለያ አለዎት?','signup.login':'ግባ',
+    'search.all':'ሁሉም አገልግሎቶች','search.count':'12 ባለሙያዎች በአዲስ አበባ',
+    'search.recommended':'የተመከረ','search.topRated':'ከፍተኛ ደረጃ','search.closest':'በቅርብ የሚገኝ',
+    'services.braids':'ሹሩባ','services.naturalHair':'ተፈጥሮ ጸጉር','services.haircut':'የጸጉር አሰራር',
+    'services.makeup':'ሜካፕ','services.nails':'ጥፍር','services.henna':'ሄና',
+    'services.locs':'ሎኮች','services.bridal':'የሙሽራ','services.eyelashes':'ሽፋሽፍት',
+    'services.weaves':'ዊቭስ','services.silkPress':'ሲልክ ፕሬስ','services.mensHaircut':'የወንዶች ጸጉር',
+    'stylist.topPro':'ምርጥ ባለሙያ','stylist.watchIntro':'መግቢያ ይመልከቱ · 30 ሰከንድ','stylist.responds':'ብዙ ጊዜ በ30 ደቂቃ ይመልሳል',
+    'stylist.reviews':'ግምገማዎች','stylist.bookings':'ቀጥሮዎች','stylist.reviewsTab':'ግምገማዎች (248)',
+    'stylist.bio':'በሹሩባ እና በተፈጥሮ ጸጉር እንክብካቤ ላይ የተካነ። 6 ዓመት ልምድ።',
+    'stylist.bookAppt':'ቀጥሮ ያዙ','stylist.share':'አጋራ',
+    'stylist.services':'አገልግሎቶች','stylist.portfolio':'ስራዎች','stylist.about':'ስለ',
+    'stylist.mostPopular':'በጣም ታዋቂ','stylist.extIncl':'የጸጉር ኤክስቴንሽን ተካቷል',
+    'book.back':'ወደ ስታይሊስት ተመለስ',
+    'book.s1t':'ቀን እና ሰዓት ይምረጡ','book.s1s':'ከእርሷ ቀን መቁጠሪያ የቀጥታ ጊዜ።',
+    'book.times':'ያሉ ሰዓቶች','book.fri24':'ዓርብ፣ ሚያዝያ 24',
+    'book.s2t':'ዝርዝሮችን ያክሉ','book.s2s':'ስታይሊስትዎ እንዲዘጋጅ ይርዱ።',
+    'book.phone':'የስልክ ቁጥርዎ','book.note':'ለስታይሊስት ማስታወሻ (አማራጭ)',
+    'book.notePh':'የጸጉር አይነት፣ ርዝመት፣ ማመሳከሪያዎች...','book.toPay':'ወደ ክፍያ ቀጥል',
+    'book.s3t':'ቀጥሮውን ለማረጋገጥ ቀጥሮ ይክፈሉ','book.s3s':'የ20% ቀጥሮ ቀጠሮዎን ይይዛል። የቀረው በቦታው ይከፈላል።',
+    'book.tbDesc':'ከሞባይል ገንዘብዎ ይክፈሉ','book.mpDesc':'ከሳፋሪኮም ኢትዮጵያ ይክፈሉ',
+    'book.card':'ክሬዲት ወይም ዴቢት ካርድ','book.cardDesc':'ለዳያስፖራ ክፍያ',
+    'book.protected':'ተጠብቀዋል።','book.protText':'ካልመጣች ቀጥሮዎ በ24 ሰዓት ይመለሳል።',
+    'book.payConfirm':'300 ብር ቀጥሮ ይክፈሉ እና ያረጋግጡ','book.okTitle':'ተረጋግጧል።',
+    'book.okSub':'ኤስኤምኤስ እና ቴሌግራም ማስታወሻዎች ይላካሉ።',
+    'book.service':'አገልግሎት','book.date':'ቀን','book.time':'ሰዓት','book.total':'ጠቅላላ',
+    'book.depToday':'የ20% ቀጥሮ ዛሬ: 300 ብር','book.depRest':'የቀረው 1,200 ብር በቦታው ይከፈላል።',
+    'pj.eye':'ለነጻ ስታይሊስቶች','pj.title':'የራስዎ ስራ። የራስዎ ብራንድ።',
+    'pj.sub':'የባለሙያ ቦታ ማስያዣ ገጽ ይገንቡ። ቴሌብር ቀጥሮ ይውሰዱ።',
+    'pj.start':'21 ቀን ነጻ ሙከራ ይጀምሩ','pj.seePrice':'ዋጋ ይመልከቱ','pj.noCard':'ክሬዲት ካርድ የለም · 0% ኮሚሽን · በማንኛውም ይሰርዙ',
+    'pj.days':'ቀናት','pj.s1':'ቅንብርዎን ለማዘጋጀት','pj.s2':'በቀጥሮ ላይ ኮሚሽን','pj.s3':'ሁሉንም ነጻ ለመሞከር',
+    'pj.featTitle':'ስራዎን ለማስኬድ የሚያስፈልገዎት ሁሉ።','pj.featSub':'ለኢትዮጵያ የውበት ባለሙያዎች የተሰራ።',
+    'pj.f1t':'የቀጥታ ቀን መቁጠሪያ','pj.f1d':'ደንበኞች ራሳቸውን ይይዛሉ።',
+    'pj.f2t':'የቴሌብር ቀጥሮ','pj.f2d':'20% በመጀመሪያ።',
+    'pj.f3t':'የቪዲዮ መግቢያ','pj.f3d':'30 ሰከንድ።',
+    'pj.f4t':'የደንበኛ ዳታቤዝ','pj.f4d':'በደንበኛ የግል ማስታወሻ።',
+    'pj.f5t':'የቦታ መሙያ ማንቂያ','pj.f5d':'መሰረዝ? ተወዳጅ ደንበኞች መጀመሪያ ይነገራቸዋል።',
+    'pj.f6t':'የገቢ ዳሽቦርድ','pj.f6d':'ቀን፣ ሳምንት፣ ወር።',
+    'pr.title':'በነጻ ይጀምሩ። በኋላ ይወስኑ።','pr.sub':'ሁሉንም ለመሞከር 21 ቀናት። ክሬዲት ካርድ የለም።',
+    'pr.found':'★ የመስራቾች ቡድን ቅናሽ','pr.trial':'21 ቀን ነጻ','pr.trialSub':'እያንዳንዱን ባህሪ ይሞክሩ።',
+    'pr.after':'ሙከራዎ ካለቀ በኋላ','pr.month':'ወር',
+    'pr.l1':'0% ኮሚሽን — 100% የቀጥሮውን ይያዙ',
+    'pr.l2':'የተረጋገጠ ቅንብር + የቪዲዮ መግቢያ',
+    'pr.l3':'የቀጥታ የቦታ ማስያዣ ቀን መቁጠሪያ',
+    'pr.l4':'የቴሌብር ቀጥሮ ስብስብ',
+    'pr.l5':'በአገልግሎት የተወሰነ አገናኝ',
+    'pr.l6':'የደንበኛ ዳታቤዝ ከማስታወሻዎች ጋር',
+    'pr.l7':'የመጨረሻ ደቂቃ የቦታ መሙያ ማንቂያ',
+    'pr.l8':'የተረጋገጠ የግምገማ ስርዓት',
+    'pr.l9':'በቆንጅት ግኝት ውስጥ ይታያል',
+    'pr.cta':'ነጻ ሙከራዎን ይጀምሩ',
+    'set.prog':'የቅንብር ሂደት','set.step':'ደረጃ',
+    'set.s1':'ስለ እርስዎ','set.s2':'አገልግሎቶች እና ዋጋ','set.s3':'የስራ ፎቶዎች','set.s4':'ሰዓቶች እና ቦታ',
+    'set.aboutT':'ስለ እርስዎ ይንገሩን።','set.aboutS':'የህዝብ ቅንብርዎን ይገንቡ።',
+    'set.basics':'መሰረታዊ','set.name':'ሙሉ ስም','set.phone':'ስልክ','set.email':'ኢሜይል','set.bio':'አጭር ቢዮ',
+    'set.bioPh':'ስለ ስራዎ ለደንበኞች ይንገሩ...',
+    'set.svcT':'አገልግሎቶችዎን ያቋቁሙ።','set.svcS':'እያንዳንዱን አገልግሎት ከዋጋ እና ጊዜ ጋር ይዘርዝሩ።',
+    'set.colName':'ስም እና ማስታወሻ','set.colDur':'ቆይታ','set.colPrice':'ዋጋ (ብር)','set.colVis':'ታይነት',
+    'set.public':'ሁሉም','set.private':'የግል አገናኝ','set.addSvc':'ሌላ አገልግሎት ያክሉ',
+    'set.phT':'ስራዎን ያሳዩ።','set.phS':'እስከ 9 ፎቶዎች እና የ30 ሰከንድ ቪዲዮ ያስቀምጡ።',
+    'set.video':'የ30 ሰከንድ መግቢያ ቪዲዮ','set.uploadVid':'ቪዲዮ ይስቀሉ',
+    'set.hT':'ሰዓቶችዎ እና ቦታዎ።','set.hS':'መቼ እንደሚገኙ።',
+    'set.loc':'የት ይሰራሉ?','set.locHome':'የቤት ስቱዲዮ','set.locMobile':'ወደ ደንበኞች እጓዛለሁ',
+    'set.locRent':'በሳሎን ወንበር አከራያለሁ','set.locOwn':'የራሴ ሳሎን አለኝ','set.nbhd':'ሰፈር',
+    'set.finish':'ጨርስ እና አሳትም','set.doneT':'ቅንብርዎ በቀጥታ ላይ ነው።','set.doneS':'21 ቀን ነጻ ሙከራ ተጀምሯል።','set.toDash':'ወደ ዳሽቦርድ ሂድ',
+    'dsh.trial':'ሙከራ · 18 ቀናት ይቀራሉ','dsh.overview':'አጠቃላይ','dsh.calendar':'ቀን መቁጠሪያ',
+    'dsh.bookings':'ቀጥሮዎች','dsh.services':'አገልግሎቶች','dsh.earnings':'ገቢዎች',
+    'dsh.hello':'እንደምን አደሩ፣','dsh.youHave':'አለዎት','dsh.apptToday':'ቀጥሮዎች ዛሬ',
+    'dsh.wkBook':'የዚህ ሳምንት ቀጥሮዎች','dsh.wkEarn':'የዚህ ሳምንት ገቢ','dsh.vsLast':'ካለፈው ሳምንት',
+    'dsh.views':'የቅንብር እይታዎች','dsh.rating':'አማካይ ደረጃ','dsh.revs':'ግምገማዎች',
+    'dsh.upcoming':'መጪ ቀጥሮዎች','dsh.today':'ዛሬ','dsh.tomorrow':'ነገ',
+    'dsh.returning':'ተመላሽ','dsh.msg':'መልዕክት',
+    'di.eye':'ለኢትዮጵያ ዳያስፖራ','di.title':'ከለንደን ወደ ቦሌ በ60 ሰከንድ።',
+    'di.sub':'ለቤት ጉብኝትዎ የተረጋገጠ ስታይሊስት ይያዙ — ወይም ለቤተሰብ የሳሎን ቀን ይሸልሙ።',
+    'di.cta':'በአዲስ አበባ ስታይሊስት ያግኙ','di.featT':'ቆንጅት ብቻ የሚያደርጋቸው ሶስት ነገሮች።',
+    'di.f1t':'በምንዛሬዎ ይክፈሉ','di.f1d':'USD, GBP, EUR። ስታይሊስት በብር ይከፈላል።',
+    'di.f2t':'ከመምጣትዎ በፊት ይያዙ','di.f2d':'ቀጥሮዎችን አስቀድመው ይያዙ።',
+    'di.f3t':'የሳሎን ቀን ይሸልሙ','di.f3d':'በ WhatsApp ቮውቸር ይላኩ።',
+    'sa.eye':'ለሳሎኖች እና ስፓዎች','sa.title':'እያንዳንዱን ወንበር ይሙሉ።',
+    'sa.sub':'ሳሎንዎን ይዘርዝሩ። 24/7 ቦታዎችን ይውሰዱ።',
+    'sa.cta':'ሳሎኔን በነጻ ይዘርዝሩ','sa.prT':'ደንበኞችን ስናመጣ ብቻ ይክፈሉ።','sa.prS':'ምንም የቅድሚያ ክፍያ የለም።',
+    'sa.l1t':'መዘርዘር ነጻ','sa.l1d':'የቅድሚያ ክፍያ የለም',
+    'sa.l2t':'15% ኮሚሽን','sa.l2d':'ለአዲስ ደንበኞች ብቻ',
+    'sa.l3t':'0% በተመላሽ ደንበኞች','sa.l3d':'ለዘላለም የእርስዎ',
+    'sa.l4t':'የቴሌብር ቀጥሮ','sa.l4d':'የማይመጡ ደንበኞችን ያስወግዱ',
+    'sa.l5t':'ከውጭ የሚታይ','sa.l5d':'ደንበኞች ከውጭ ይይዛሉ',
+    'ft.tag':'የኢትዮጵያ የመጀመሪያ የተረጋገጠ የውበት ገበያ።','ft.stylists':'ለስታይሊስቶች','ft.clients':'ለደንበኞች','ft.made':'በአዲስ አበባ የተሰራ'
+  },
+  om: {
+    'nav.login':'Seenuu','nav.joinStylist':'Akka stayilistiitti seeni',
+    'menu.forStylists':'Stayilistootaaf','menu.forSalons':'Saloonotaaf','menu.forClients':'Maamiltootaaf',
+    'menu.findStylist':'Stayilistii barbaadi','menu.listSalon':"Saloonii kee galmeessi",'menu.diaspora':'Daayispooraa booking',
+    'menu.home':'Mana','menu.pricing':'Gatii','menu.language':'Afaan',
+    'common.seeAll':'Hunda ilaali →','common.or':'ykn','common.continue':'Itti fufi','common.back':'Duuba',
+    'common.done':'Xumurame','common.book':"Galmaa'i",'common.birr':'birr','common.hour':"sa'aatii",'common.hours':"sa'aatii",
+    'home.headline':'Ogeeyyii bareedinaa amanamoo Finfinneetti argi.',
+    'home.searchService':'Tajaajila, stayilistii ykn saloonii','home.searchLoc':'Boolee, Finfinnee',
+    'home.growBiz':'Daldala kee Qonjit waliin guddisi',
+    'home.findByService':'Tajaajilaan ogeeyyii argi','home.topPros':"Ogeeyyii naannoo kee jiran",
+    'how.discover':'Argachuu','how.discoverText':'Tajaajilaan, stayilistiin ykn naannoodhaan barbaadi.',
+    'how.book':"Galmaa'i",'how.bookText':"Yeroo kee filadhuu, Telebirr xiqqaa kaffali.",
+    'how.showup':'Dhufi','how.showupText':'Yaadachiisni SMS fi Telegram ni dhufa.',
+    'biz.title':'Daldala kee Qonjit irra qopheessi.','biz.sub':'Stayilistoota 30 jalqabaatti makamu. Yaalii bilisaa guyyaa 21.',
+    'biz.cta':'Daldala koo qopheessi',
+    'biz.b1t':'Daldala kee guddisi','biz.b1d':'TikTok fi Qonjit barbaada keessa muldhata.',
+    'biz.b2t':'Daldala kee bulchi','biz.b2d':'Kaalandara, maamiltoota, dipoozii bakka tokkotti.',
+    'biz.b3t':'Saffisaan kaffalami','biz.b3d':'Telebirr dipoozii beellama dura.',
+    'biz.b4t':'Guyyaa 21 bilisa','biz.b4d':'0% komishinii. Gatiin yaalii booda.',
+    'login.title':"Baga nagaan deebi'an",'login.sub':"Galmeessuu fi jaalatamoo deebisuuf seeni.",
+    'login.google':'Google waliin itti fufi','login.email':'Email ykn bilbila','login.pwd':'Jecha icciitii',
+    'login.cta':'Seenuu','login.noAcct':'Akkawuntii hin qabdu?','login.signup':"Bilisaan galmaa'i",
+    'signup.title':'Akkawuntii kee uumi','signup.sub':"Yeroo hundaa bilisa. Sekondii 60 keessatti galmaa'i.",
+    'signup.first':'Maqaa duraa','signup.last':'Maqaa abbaa','signup.email':'Email','signup.phone':'Bilbila',
+    'signup.pwd':'Jecha icciitii','signup.cta':'Akkawuntii uumi','signup.have':'Akkawuntii qabdaa?','signup.login':'Seenuu',
+    'search.all':'Tajaajila hunda','search.count':'Ogeeyyii 12 Finfinnee keessa',
+    'search.recommended':'Gorfame','search.topRated':'Sadarkaa olaanaa','search.closest':'Dhihoo',
+    'services.braids':'Shuruubaa','services.naturalHair':'Rifeensa Uumamaa','services.haircut':'Rifeensa muruu',
+    'services.makeup':'Meekaappii','services.nails':'Qeensa','services.henna':'Heenaa',
+    'services.locs':'Looksii','services.bridal':'Misirroo','services.eyelashes':'Rifeensa ija',
+    'services.weaves':'Wiivsii','services.silkPress':'Siilkii Press','services.mensHaircut':'Rifeensa Dhiiraa',
+    'stylist.topPro':'Ogeessa Olaanaa','stylist.watchIntro':'Seensa ilaali · 30s','stylist.responds':"Yeroo baay'ee daqiiqaa 30 keessatti deebisa",
+    'stylist.reviews':'gamaaggama','stylist.bookings':'beellama','stylist.reviewsTab':'Gamaaggama (248)',
+    'stylist.bio':"Sheekoo ittisaa fi kunuunsa rifeensa irratti ogummaa qaba. Waggaa 6 muuxannoo.",
+    'stylist.bookAppt':"Beellama galmaa'i",'stylist.share':'Qoodi',
+    'stylist.services':'Tajaajila','stylist.portfolio':'Hojii','stylist.about':"Waa'ee",
+    'stylist.mostPopular':"Baay'ee jaalatamaa",'stylist.extIncl':'Ekstenshinii ni dabalata',
+    'book.back':"Gara stayilistiitti deebi'i",
+    'book.s1t':'Guyyaa fi yeroo filadhu','book.s1s':'Argamuu kaalandara isheerraa.',
+    'book.times':'Yeroowwan jiran','book.fri24':'Jimaata, Eblaa 24',
+    'book.s2t':"Bal'ina dabali",'book.s2s':"Stayilistii kee qophaa'uu gargaari.",
+    'book.phone':'Lakkoofsa bilbila keetii','book.note':'Yaadachiisa (filannoo)',
+    'book.notePh':'Akkaataa rifeensaa, dheerina...','book.toPay':'Gara kaffaltii itti fufi',
+    'book.s3t':'Beellama mirkaneessuuf dipoozii kaffali','book.s3s':"Dipooziin 20% beellama qabata.",
+    'book.tbDesc':'Mobile money keerraa kaffali','book.mpDesc':'Safaricom keessaa kaffali',
+    'book.card':'Kireedit kaardii','book.cardDesc':'Daayispooraadhaaf',
+    'book.protected':'Eegamteetta.','book.protText':"Yoo hin dhufne, dipoozii sa'aatii 24 keessatti deebi'a.",
+    'book.payConfirm':'Birr 300 dipoozii kaffali fi mirkaneessi','book.okTitle':"Mirkanaa'eera.",
+    'book.okSub':"Yaadachiisni SMS fi Telegram ni ergama.",
+    'book.service':'Tajaajila','book.date':'Guyyaa','book.time':'Yeroo','book.total':'Walumaagala',
+    'book.depToday':"20% dipoozii har'a: birr 300",'book.depRest':'Birr 1,200 kan hafe bakkichatti.',
+    'pj.eye':'Stayilistoota ofii isaaniidhaaf','pj.title':'Kitaaba kee. Daldala kee. Beeksisa kee.',
+    'pj.sub':'Fuula booking ogeessa ijaari. Telebirr dipoozii fudhadhu.',
+    'pj.start':'Yaalii bilisaa guyyaa 21 jalqabi','pj.seePrice':'Gatii ilaali','pj.noCard':"Kaardii hin barbaachisu · 0% komishinii · Yoom illee dhaabsisuu",
+    'pj.days':'guyyaa','pj.s1':'piroofaayilii kee qopheessuuf','pj.s2':'komishinii beellama irraa','pj.s3':'hunda yaaluuf bilisaan',
+    'pj.featTitle':'Daldala kee gaggeessuuf hunda.','pj.featSub':'Ogeeyyii bareedinaa Itoophiyaadhaaf hojjetame.',
+    'pj.f1t':'Kaalandara yeroo dhugaa','pj.f1d':"Maamiltoonni ofumaan galmaa'u.",
+    'pj.f2t':'Telebirr dipoozii','pj.f2d':'20% durra. Hin dhufne xiqqaata.',
+    'pj.f3t':'Vidiyoo seensa','pj.f3d':'Sekondii 30.',
+    'pj.f4t':'Daataabeezii maamilaa','pj.f4d':'Yaadannoo dhuunfaa.',
+    'pj.f5t':'Beeksisa bakka duwwaa','pj.f5d':"Maamiltoonni jaalatamoon dura dhaga'u.",
+    'pj.f6t':'Daashboordii galii','pj.f6d':"Guyyaa, torban, ji'a.",
+    'pr.title':'Bilisaan jalqabi. Booda murteessi.','pr.sub':'Guyyaa 21 tola hunda yaaluuf. Kaardii hin barbaachisu.',
+    'pr.found':'★ Bu\'uura sirritti hojjattuu','pr.trial':'Guyyaa 21 bilisa','pr.trialSub':'Tola hunda yaali.',
+    'pr.after':'Yaaliin yeroo dhumate','pr.month':"ji'aa",
+    'pr.l1':'0% komishinii — beellama hunda 100% qabachuu',
+    'pr.l2':"Profile mirkanaa'e + vidiyoo seensa",
+    'pr.l3':'Kaalandara booking yeroo dhugaa',
+    'pr.l4':'Sassaabbii Telebirr dipoozii',
+    'pr.l5':'Hidhata booking tajaajila adda',
+    'pr.l6':'Daataabeezii maamilaa',
+    'pr.l7':'Beeksisa bakka duwwaa',
+    'pr.l8':"Sirna gamaaggama mirkanaa'e",
+    'pr.l9':'Qonjit barbaada keessatti muldhata',
+    'pr.cta':'Yaalii bilisaa jalqabi',
+    'set.prog':'Adeemsa qophii','set.step':'Tarkaanfii',
+    'set.s1':"Waa'ee keetii",'set.s2':'Tajaajila & gatii','set.s3':'Suuraa hojii','set.s4':"Sa'aatii & bakka",
+    'set.aboutT':"Waa'ee kee nutti himi.",'set.aboutS':'Profile kee ijaari.',
+    'set.basics':"Bu'uura",'set.name':'Maqaa guutuu','set.phone':'Bilbila','set.email':'Email','set.bio':'Bayoo gabaabaa',
+    'set.bioPh':"Waa'ee hojii kee himi...",
+    'set.svcT':'Tajaajila kee qopheessi.','set.svcS':'Tajaajila hunda gatii fi yeroo waliin galmeessi.',
+    'set.colName':'Maqaa & yaadachiisa','set.colDur':'Yeroo','set.colPrice':'Gatii (birr)','set.colVis':"Mul'achuu",
+    'set.public':'Uummataaf','set.private':'Hidhata dhuunfaa','set.addSvc':'Tajaajila biroo dabali',
+    'set.phT':'Hojii kee agarsiisi.','set.phS':"Suuraa 9 fi vidiyoo seensa fe'i.",
+    'set.video':'Vidiyoo seensa sekondii 30','set.uploadVid':"Vidiyoo fe'i",
+    'set.hT':"Sa'aatii fi bakka kee.",'set.hS':"Yoom akka argamtu.",
+    'set.loc':'Eessatti hojjeta?','set.locHome':'Istuudiyoo mana','set.locMobile':'Gara maamilaa deema',
+    'set.locRent':'Saloonii keessa kireeffadha','set.locOwn':'Saloonii qaba','set.nbhd':'Naannoo',
+    'set.finish':'Xumuri fi maxxansi','set.doneT':"Profile keetiin live ta'eera.",'set.doneS':'Yaaliin guyyaa 21 jalqabameera.','set.toDash':'Gara daashboordii deemi',
+    'dsh.trial':'Yaalii · Guyyaa 18 hafe','dsh.overview':'Waliigala','dsh.calendar':'Kaalandara',
+    'dsh.bookings':'Beellama','dsh.services':'Tajaajila','dsh.earnings':'Galii',
+    'dsh.hello':'Akkam bultan,','dsh.youHave':'Qabda','dsh.apptToday':"beellama har'a",
+    'dsh.wkBook':'Beellama torban kanaa','dsh.wkEarn':'Galii torban kanaa','dsh.vsLast':'torban darbe',
+    'dsh.views':'Ilaalcha profile','dsh.rating':'Sadarkaa giddugaleessa','dsh.revs':'gamaaggama',
+    'dsh.upcoming':'Beellama dhufuuf jiran','dsh.today':"Har'a",'dsh.tomorrow':'Boru',
+    'dsh.returning':"Deebi'aa",'dsh.msg':'Ergaa',
+    'di.eye':'Daayispooraa Itoophiyaadhaaf','di.title':'London irraa gara Boolee sekondii 60.',
+    'di.sub':"Stayilistii mirkanaa'aa galmeessaa — ykn maatii guyyaa saloonii kennaa.",
+    'di.cta':'Stayilistii Finfinnee keessaa argi','di.featT':'Wantoota sadii Qonjit qofti hojjetu.',
+    'di.f1t':'Maallaqa keessaniin kaffalaa','di.f1d':'USD, GBP, EUR. Stayilistiin birriidhaan kaffalama.',
+    'di.f2t':"Dura galmaa'aa",'di.f2d':'Torban dura beellama qabadhaa.',
+    'di.f3t':'Guyyaa saloonii kennaa','di.f3d':'WhatsApp irratti voowucharii erguu.',
+    'sa.eye':"Saloonota & Spa'aaf",'sa.title':'Teesso hunda guuti.',
+    'sa.sub':'Saloonii kee galmeessi. 24/7 booking fudhadhu.',
+    'sa.cta':'Saloonii koo bilisaan galmeessi','sa.prT':'Maamiltoota yommuu fidnu qofa kaffali.','sa.prS':'Kaffaltii duraa hin jiru.',
+    'sa.l1t':"Bilisaan galmaa'uu",'sa.l1d':'kaffaltii duraa hin jiru',
+    'sa.l2t':'15% komishinii','sa.l2d':'maamiltoota haaraa irratti qofa',
+    'sa.l3t':"0% deebi'an irratti",'sa.l3d':'bara baraan kan kee',
+    'sa.l4t':'Telebirr dipoozii','sa.l4d':'maamiltoota hin dhufne ittisi',
+    'sa.l5t':"Daayispooraa-galmaa'uu",'sa.l5d':"biyya alaarraa galmaa'u",
+    'ft.tag':"Gabaa bareedinaa Itoophiyaa mirkanaa'aa jalqabaa.",'ft.stylists':'Stayilistootaaf','ft.clients':'Maamiltootaaf','ft.made':'Finfinneetti hojjetame'
+  }
+};
+
+/* ===== I18N ENGINE ===== */
+let currentLang = localStorage.getItem('qonjit_lang') || 'en';
+function setLang(lang) {
+  currentLang = lang;
+  try { localStorage.setItem('qonjit_lang', lang); } catch(e){}
+  document.body.classList.remove('lang-en','lang-am','lang-om');
+  document.body.classList.add('lang-' + lang);
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.getAttribute('data-i18n');
+    const t = i18n[lang][k];
+    if (t !== undefined) el.textContent = t;
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const k = el.getAttribute('data-i18n-placeholder');
+    const t = i18n[lang][k];
+    if (t !== undefined) el.setAttribute('placeholder', t);
+  });
+  document.querySelectorAll('[data-lang]').forEach(b => {
+    b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+  });
+}
+
+/* ===== ROUTER ===== */
+function navigate(route, params) {
+  let hash = '#/' + route;
+  if (params) hash += '?' + new URLSearchParams(params).toString();
+  window.location.hash = hash;
+}
+function handleRoute() {
+  const hash = (window.location.hash.slice(2) || 'home');
+  const [route, query] = hash.split('?');
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const target = document.getElementById('page-' + route);
+  (target || document.getElementById('page-home')).classList.add('active');
+  if (query) {
+    const p = new URLSearchParams(query);
+    if (route === 'stylist' && p.get('id')) {
+      const data = {
+        hanna: {name:'Hanna Tadesse',area:'Bole, Addis Ababa',init:'HT'},
+        mahlet: {name:'Mahlet Assefa',area:'Megenagna, Addis Ababa',init:'MA'},
+        sara: {name:'Sara Kebede',area:'Kazanchis, Addis Ababa',init:'SK'},
+        ruth: {name:'Ruth Bekele',area:'Ayat, Addis Ababa',init:'RB'},
+        yodit: {name:'Yodit Alemu',area:'CMC, Addis Ababa',init:'YA'}
+      };
+      const s = data[p.get('id')];
+      if (s) {
+        document.getElementById('st-name').textContent = s.name;
+        document.getElementById('st-area').textContent = s.area;
+        document.getElementById('st-init').textContent = s.init;
+      }
+    }
+  }
+  window.scrollTo(0, 0);
+}
+window.addEventListener('hashchange', handleRoute);
+
+/* ===== MENU ===== */
+function openMenu() {
+  document.querySelector('.side').classList.add('open');
+  document.querySelector('.menu-ov').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeMenu() {
+  document.querySelector('.side').classList.remove('open');
+  document.querySelector('.menu-ov').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* ===== DATA ===== */
+const SERVICES = [
+  {key:'braids',label:'Braids',am:'ሹሩባ',cls:'s1',g:'B'},
+  {key:'natural-hair',label:'Natural Hair',am:'ተፈጥሮ ጸጉር',cls:'s2',g:'N'},
+  {key:'haircut',label:'Haircut',am:'የጸጉር አሰራር',cls:'s3',g:'H'},
+  {key:'mens-haircut',label:"Men's Haircut",am:'የወንዶች',cls:'s4',g:'M'},
+  {key:'locs',label:'Locs',am:'ሎኮች',cls:'s5',g:'L'},
+  {key:'silk-press',label:'Silk Press',am:'ሲልክ ፕሬስ',cls:'s6',g:'S'},
+  {key:'weaves',label:'Weaves',am:'ዊቭስ',cls:'s7',g:'W'},
+  {key:'makeup',label:'Makeup',am:'ሜካፕ',cls:'s8',g:'M'},
+  {key:'nails',label:'Nails',am:'ጥፍር',cls:'s9',g:'N'},
+  {key:'henna',label:'Henna',am:'ሄና',cls:'s10',g:'H'},
+  {key:'eyelashes',label:'Eyelashes',am:'ሽፋሽፍት',cls:'s11',g:'E'},
+  {key:'bridal',label:'Bridal',am:'ሙሽራ',cls:'s12',g:'B'}
+];
+const PROS = [
+  {id:'hanna',name:'Hanna Tadesse',area:'Bole',dist:'1.2 km',r:'5.0',rv:248,bg:'b1',init:'HT',badge:'top',svc:'Braids · Natural · 4C',from:800},
+  {id:'mahlet',name:'Mahlet Assefa',area:'Megenagna',dist:'0.8 km',r:'4.9',rv:187,bg:'b2',init:'MA',badge:'loved',svc:'Makeup · Bridal · Eyelashes',from:1200},
+  {id:'sara',name:'Sara Kebede',area:'Kazanchis',dist:'2.1 km',r:'4.9',rv:312,bg:'b3',init:'SK',badge:'top',svc:'Locs · Twists · Natural',from:1500},
+  {id:'ruth',name:'Ruth Bekele',area:'Ayat',dist:'1.5 km',r:'5.0',rv:96,bg:'b4',init:'RB',badge:'loved',svc:'Henna · Bridal · Traditional',from:600},
+  {id:'yodit',name:'Yodit Alemu',area:'CMC',dist:'3.4 km',r:'4.8',rv:421,bg:'b5',init:'YA',badge:'top',svc:'Nails · Pedicure · Gel',from:500}
+];
+
+function badgeSvg(t) {
+  return t === 'top'
+    ? '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/>'
+    : '<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>';
+}
+
+function buildServices() {
+  document.getElementById('svc-grid').innerHTML = SERVICES.map(s => `
+    <a class="svc" onclick="navigate('search',{service:'${s.key}'})">
+      <div class="svc-i ${s.cls}"><div class="svc-g">${s.g}</div><div class="svc-am">${s.am}</div></div>
+      <div class="svc-lb">${s.label}</div>
+    </a>`).join('');
+}
+function buildPros() {
+  document.getElementById('pros').innerHTML = PROS.map(p => `
+    <a class="pro" onclick="navigate('stylist',{id:'${p.id}'})">
+      <div class="pro-i">
+        <div class="pro-bg ${p.bg}">${p.init}</div>
+        <div class="badge"><svg viewBox="0 0 24 24" fill="currentColor">${badgeSvg(p.badge)}</svg>${p.badge === 'top' ? 'Top Pro' : 'Loved'}</div>
+        <div class="verify"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+      </div>
+      <div class="pro-info">
+        <div class="pro-name">${p.name}</div>
+        <div class="pro-meta">${p.area} · ${p.dist}</div>
+        <div class="pro-rating">★ ${p.r} <span class="c">(${p.rv})</span></div>
+      </div>
+    </a>`).join('');
+}
+function buildResults() {
+  document.getElementById('r-grid').innerHTML = PROS.concat(PROS.slice(0, 3)).map((p, i) => `
+    <a class="pro-lg" onclick="navigate('stylist',{id:'${p.id}'})">
+      <div class="pro-i">
+        <div class="pro-bg ${p.bg}">${p.init}</div>
+        <div class="badge"><svg viewBox="0 0 24 24" fill="currentColor">${badgeSvg(p.badge)}</svg>${p.badge === 'top' ? 'Top Pro' : 'Loved'}</div>
+        <div class="verify"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+      </div>
+      <div class="pro-info">
+        <div class="pro-name">${p.name}</div>
+        <div class="pro-meta">${p.area} · ${p.dist}</div>
+      </div>
+      <div class="pro-svc">${p.svc}</div>
+      <div class="pro-bot">
+        <div style="font-size:13px">★ ${p.r} <span style="color:var(--muted)">(${p.rv})</span></div>
+        <div class="pro-price"><span class="from">from</span> ${p.from} birr</div>
+      </div>
+    </a>`).join('');
+}
+
+/* ===== INTERACTIONS ===== */
+function handleHomeSearch(e) {
+  e.preventDefault();
+  const q = document.getElementById('home-q').value.trim();
+  const l = document.getElementById('home-loc').value.trim();
+  const p = {};
+  if (q) p.q = q;
+  if (l) p.location = l;
+  navigate('search', p);
+}
+function handleSearch(e) {
+  e.preventDefault();
+  const q = document.getElementById('s-q').value.trim();
+  const l = document.getElementById('s-loc').value.trim();
+  const p = {};
+  if (q) p.q = q;
+  if (l) p.location = l;
+  navigate('search', p);
+}
+function handleLogin(e) { e.preventDefault(); navigate('home'); }
+function handleSignup(e) { e.preventDefault(); navigate('home'); }
+
+function selTime(el) {
+  document.querySelectorAll('.tslot').forEach(s => s.classList.remove('sel'));
+  el.classList.add('sel');
+}
+function selPay(el) {
+  document.querySelectorAll('.pay').forEach(p => p.classList.remove('sel'));
+  el.classList.add('sel');
+}
+function bookStep(n) {
+  ['1', '2', '3', 'ok'].forEach(k => {
+    const e = document.getElementById('bk-' + k);
+    if (e) e.style.display = 'none';
+  });
+  document.getElementById('bk-' + n).style.display = 'block';
+  ['bs1','bs2','bs3'].forEach((id, i) => {
+    const el = document.getElementById(id);
+    el.classList.remove('active','done');
+    if (i + 1 < n) el.classList.add('done');
+    else if (i + 1 === n) el.classList.add('active');
+  });
+  window.scrollTo(0, 0);
+}
+function confirmBooking() {
+  document.getElementById('bk-3').style.display = 'none';
+  document.getElementById('bk-ok').style.display = 'block';
+  ['bs1','bs2','bs3'].forEach(id => {
+    const el = document.getElementById(id);
+    el.classList.remove('active');
+    el.classList.add('done');
+  });
+  window.scrollTo(0, 0);
+}
+function bookSvc(name, price, dur) {
+  const labels = {
+    'knotless-medium': 'Knotless Braids — Medium',
+    'box-braids': 'Box Braids',
+    'wash': 'Hair wash + blowdry'
+  };
+  document.getElementById('sum-svc').textContent = labels[name] || name;
+  document.getElementById('sum-tot').textContent = price.toLocaleString() + ' birr';
+  const dep = Math.round(price * 0.2);
+  document.querySelector('.dep strong').textContent = '20% deposit today: ' + dep + ' birr';
+  navigate('book', {service: name, price: price});
+}
+
+function setupGo(n) {
+  for (let i = 1; i <= 4; i++) {
+    const el = document.getElementById('set-' + i);
+    if (el) el.style.display = (i === n) ? 'block' : 'none';
+  }
+  document.getElementById('set-done').style.display = 'none';
+  document.querySelectorAll('.set-step').forEach(s => {
+    const k = parseInt(s.dataset.step);
+    s.classList.remove('active', 'done');
+    if (k < n) s.classList.add('done');
+    else if (k === n) s.classList.add('active');
+  });
+  const pct = (n / 4) * 100;
+  document.getElementById('set-fill').style.width = pct + '%';
+  document.getElementById('set-text').innerHTML = '<span>Step</span> ' + n + ' / 4';
+  window.scrollTo(0, 0);
+}
+function finishSetup() {
+  for (let i = 1; i <= 4; i++) {
+    const el = document.getElementById('set-' + i);
+    if (el) el.style.display = 'none';
+  }
+  document.getElementById('set-done').style.display = 'block';
+  document.querySelectorAll('.set-step').forEach(s => { s.classList.remove('active'); s.classList.add('done'); });
+  document.getElementById('set-fill').style.width = '100%';
+  window.scrollTo(0, 0);
+}
+function addSvc() {
+  const tab = document.getElementById('svc-edit');
+  const r = document.createElement('div');
+  r.className = 'svc-tr';
+  r.innerHTML = `
+    <div><input class="svc-ni" placeholder="Service name"><input class="svc-no" placeholder="Note (optional)"></div>
+    <input class="svc-ii" placeholder="e.g. 2 hours">
+    <input class="svc-ii" placeholder="0">
+    <select class="svc-ii"><option>Public</option><option>Private link</option></select>
+    <button class="del" onclick="this.closest('.svc-tr').remove()">✕</button>`;
+  tab.appendChild(r);
+  r.querySelector('.svc-ni').focus();
+}
+
+/* ===== INIT ===== */
+document.addEventListener('DOMContentLoaded', () => {
+  buildServices();
+  buildPros();
+  buildResults();
+  setLang(currentLang);
+  handleRoute();
+});
+</script>
+
+</body>
+</html>
